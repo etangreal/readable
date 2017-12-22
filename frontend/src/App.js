@@ -3,11 +3,19 @@ import { Route } from 'react-router-dom';
 import logo from './logo.svg';
 import './App.css';
 
+const updateCategories = (categories) => (state) => ({
+  backend: {
+    ... state.backend,
+    categories
+  }
+})
+
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
       backend: {
+        posts: [],
         categories: []
       }
     }
@@ -29,8 +37,12 @@ class App extends Component {
         return(res.text())
       })
       .then((data) => {
-        this.setState({backend: JSON.parse(data)});
+        this.setState(updateCategories(JSON.parse(data)))
       });
+  }
+
+  posts = () => {
+    return Posts(this.state.backend);
   }
 
   categories = () => {
@@ -41,10 +53,7 @@ class App extends Component {
     return (
       <div>
 
-        <Route exact path='/' render={() => starterPage({
-          logo,
-          backend: this.state.backend
-        })} />
+        <Route exact path='/' render={this.posts} />
 
         <Route exact path='/categories' render={this.categories} />
 
@@ -71,20 +80,8 @@ const Categories = ({categories}) => {
   );
 };
 
-const starterPage = ({logo, backend}) => (
-  <div className="App">
-    <div className="App-header">
-      <img src={logo} className="App-logo" alt="logo" />
-      <h2>Welcome to React</h2>
-    </div>
-    <p className="App-intro">
-      To get started, edit <code>src/App.js</code> and save to reload.
-    </p>
-    <p>
-      Talking to the backend yields these categories: <br/>
-      {JSON.stringify(backend)}
-    </p>
-  </div>
-);
+const Posts = ({posts}) => {
+  return <div> Posts </div>
+}
 
 export default App;
