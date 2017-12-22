@@ -22,6 +22,10 @@ class App extends Component {
   }
 
   componentDidMount() {
+    this.fetchCategories();
+  }
+
+  fetchCategories = () => {
     const url = `${process.env.REACT_APP_BACKEND}/categories`;
     const header = {
       headers: {
@@ -30,14 +34,12 @@ class App extends Component {
       // credentials: 'include'
     };
 
-    console.log('fetching from url', url);
-
     fetch(url, header)
       .then((res) => {
-        return(res.text())
+        return(res.json())
       })
       .then((data) => {
-        this.setState(updateCategories(JSON.parse(data)))
+        this.setState(updateCategories(data))
       });
   }
 
