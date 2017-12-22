@@ -12,10 +12,19 @@ class App extends Component {
 
   componentDidMount() {
     const url = `${process.env.REACT_APP_BACKEND}/categories`;
+    const header = {
+      headers: {
+        'Authorization': 'whatever-you-want'
+      },
+      // credentials: 'include'
+    };
+
     console.log('fetching from url', url);
-    fetch(url, { headers: { 'Authorization': 'whatever-you-want' },
-                 credentials: 'include' } )
-      .then( (res) => { return(res.text()) })
+
+    fetch(url, header)
+      .then((res) => {
+        return(res.text())
+      })
       .then((data) => {
         this.setState({backend:data});
       });
