@@ -33,10 +33,20 @@ class App extends Component {
 
   render() {
     return (
-      <Route exact path='/' render={() => starterPage({
-        logo,
-        backend: this.state.backend
-      })} />
+      <div>
+
+        <Route exact path='/' render={() => starterPage({
+          logo,
+          backend: this.state.backend
+        })} />
+
+        <Route exact path='/categories' render={() => <div>Categories</div>} />
+
+        <Route exact path='/posts' render={() => <div>Posts</div>} />
+
+        <Route exact path='/comments' render={() => <div>Comments</div>} />
+
+      </div>
     );
   }
 }
