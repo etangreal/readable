@@ -3,12 +3,18 @@ import { Route } from 'react-router-dom';
 import logo from './logo.svg';
 import './App.css';
 
+const updatePosts = (posts) => (state) => ({
+  backend: {
+    ... state.backend,
+    posts
+  }
+});
 const updateCategories = (categories) => (state) => ({
   backend: {
     ... state.backend,
     categories
   }
-})
+});
 
 class App extends Component {
   constructor(props) {
@@ -22,7 +28,26 @@ class App extends Component {
   }
 
   componentDidMount() {
+    this.fetchPosts();
     this.fetchCategories();
+  }
+
+  fetchPosts = () => {
+    const url = `${process.env.REACT_APP_BACKEND}/posts`;
+    const header = {
+      headers: {
+        'Authorization': 'whatever-you-want'
+      },
+      // credentials: 'include'
+    };
+
+    fetch(url, header)
+      .then((res) => {
+        return(res.json())
+      })
+      .then((data) => {
+        this.setState(updatePosts(data))
+      });
   }
 
   fetchCategories = () => {
