@@ -7,7 +7,9 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      backend: 'backend-data'
+      backend: {
+        categories: []
+      }
     }
   }
 
@@ -27,8 +29,12 @@ class App extends Component {
         return(res.text())
       })
       .then((data) => {
-        this.setState({backend:data});
+        this.setState({backend: JSON.parse(data)});
       });
+  }
+
+  categories = () => {
+    return Categories(this.state.backend);
   }
 
   render() {
@@ -40,7 +46,7 @@ class App extends Component {
           backend: this.state.backend
         })} />
 
-        <Route exact path='/categories' render={() => <div>Categories</div>} />
+        <Route exact path='/categories' render={this.categories} />
 
         <Route exact path='/posts' render={() => <div>Posts</div>} />
 
@@ -50,6 +56,20 @@ class App extends Component {
     );
   }
 }
+
+const Categories = ({categories}) => {
+  const list = categories.map(category =>
+    <li key={category.name}>
+      {category.name}
+    </li>
+  );
+
+  return (
+    <ul>
+      {list}
+    </ul>
+  );
+};
 
 const starterPage = ({logo, backend}) => (
   <div className="App">
@@ -62,7 +82,7 @@ const starterPage = ({logo, backend}) => (
     </p>
     <p>
       Talking to the backend yields these categories: <br/>
-      {backend}
+      {JSON.stringify(backend)}
     </p>
   </div>
 );
