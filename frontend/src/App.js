@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Route } from 'react-router-dom';
 import logo from './logo.svg';
 import './App.css';
 
@@ -31,10 +32,12 @@ class App extends Component {
   }
 
   render() {
-    return starterPage({
-      logo,
-      backend: this.state.backend
-    });
+    return (
+      <Route exact path='/' render={() => starterPage({
+        logo,
+        backend: this.state.backend
+      })} />
+    );
   }
 }
 
