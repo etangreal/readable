@@ -1,0 +1,849 @@
+{
+	"info": {
+		"name": "Udacity-React-02-readable",
+		"_postman_id": "3fc3b367-d12c-28a4-c98a-a347cd28ebb8",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "/categories",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "nopass",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "ernst",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:3001/categories",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"categories"
+					]
+				},
+				"description": "udacity readable api-server get"
+			},
+			"response": []
+		},
+		{
+			"name": "/:category/posts => (react)",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "nopass",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "ernst",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:3001/:category/posts",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						":category",
+						"posts"
+					],
+					"variable": [
+						{
+							"key": "category",
+							"value": "react"
+						}
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "/posts",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "nopass",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "ernst",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:3001/posts",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"posts"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "/posts/:id => (first)",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "nopass",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "ernst",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:3001/posts/:id",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"posts",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "8xf0y6ziyjabvozdd253nd"
+						}
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "/posts/:id => (test)",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "nopass",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "ernst",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:3001/posts/:id",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"posts",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "6ni6ok3ym7mf1p33labc"
+						}
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "/posts => (new)",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "nopass",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "ernst",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "    {\n        \"id\": \"6ni6ok3ym7mf1p33labc\",\n        \"timestamp\": 1468479767190,\n        \"title\": \"test-title-post\",\n        \"author\": \"test-author-post\",\n        \"body\": \"test-body-post\",\n        \"category\": \"react\"\n    }"
+				},
+				"url": {
+					"raw": "http://localhost:3001/posts",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"posts"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "/posts/:id => (new)",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "nopass",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "ernst",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\": \"test-title-post-UPDATED\",\n    \"body\": \"test-body-post-UPDATED\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3001/posts/:id",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"posts",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "6ni6ok3ym7mf1p33labc"
+						}
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "/posts/:id => (new)",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "nopass",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "ernst",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:3001/posts/:id",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"posts",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "6ni6ok3ym7mf1p33labc"
+						}
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "/comments/:id => (upvote, first)",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "nopass",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "ernst",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"option\": \"upVote\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3001/posts/:id",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"posts",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "8xf0y6ziyjabvozdd253nd"
+						}
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "/comments/:id => (downvote, first)",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "nopass",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "ernst",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"option\": \"downVote\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3001/posts/:id",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"posts",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "8xf0y6ziyjabvozdd253nd"
+						}
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "/posts/:id/comments => (first/comments)",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "nopass",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "ernst",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:3001/posts/:id/comments",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"posts",
+						":id",
+						"comments"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "8xf0y6ziyjabvozdd253nd"
+						}
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "/comments => (new)",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "nopass",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "ernst",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": \"6ni6ok3ym7mf1p44labc\",\n    \"parentId\": \"8xf0y6ziyjabvozdd253nd\",\n    \"timestamp\": 1468479767190,\n    \"body\": \"test-body-comment\",\n    \"author\": \"test-author-comment\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3001/comments",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"comments"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "/comments/:id => (first)",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "nopass",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "ernst",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:3001/comments/:id",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"comments",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "894tuq4ut84ut8v4t8wun89g"
+						}
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "/comments/:id => (new)",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "nopass",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "ernst",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:3001/comments/:id",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"comments",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "6ni6ok3ym7mf1p44labc"
+						}
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "/comments/:id => (upvote, new)",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "nopass",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "ernst",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"option\": \"upVote\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3001/comments/:id",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"comments",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "6ni6ok3ym7mf1p44labc"
+						}
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "/comments/:id => (downvote, new)",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "nopass",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "ernst",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"option\": \"down    PUT /comments/:id\n      USAGE:\n        Edit the details of an existing commentVote\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3001/comments/:id",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"comments",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "6ni6ok3ym7mf1p44labc"
+						}
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "/comments/:id => (new)",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "nopass",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "ernst",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"body\": \"test-body-comment-UPDATED\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3001/comments/:id",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"comments",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "6ni6ok3ym7mf1p44labc"
+						}
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "/comments/:id => (new)",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "nopass",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "ernst",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:3001/comments/:id",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"comments",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "6ni6ok3ym7mf1p44labc"
+						}
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "3f9cfa23-6c96-4833-b3f9-e779183f2f92",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "fd3ae367-6b1c-4447-856a-699c198fa70f",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
