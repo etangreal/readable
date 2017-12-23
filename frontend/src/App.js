@@ -76,15 +76,41 @@ class App extends Component {
     });
   }
 
+  renderPostDetails = (props) => {
+    return PostDetails({
+      posts: this.state.backend.posts,
+      category: props.match.params.category,
+      postId: props.match.params.postId
+    });
+  }
+
   render() {
     return (
       <div>
         <Route exact path='/' render={this.renderPosts} />
 
         <Route exact path='/:category' render={this.renderPostsByCategory} />
+
+        <Route exact path='/:category/:postId' render={this.renderPostDetails} />
       </div>
     );
   }
+}
+
+const PostDetails = ({posts, category, postId}) => {
+  const post = posts.find(post => post.id === postId);
+
+  return post ? (
+      <div>
+        id: {post.id}<br />
+        author: {post.author}<br />
+        title: {post.title}<br />
+        category: {post.category}<br />
+        body: {post.body}<br />
+        timestamp: {post.timestamp}<br />
+        voteScore: {post.voteScore}
+      </div>
+    ) : <div>none</div>;
 }
 
 const PostsByCategory = ({posts, category}) => {
