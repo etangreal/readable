@@ -2,14 +2,19 @@ import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
 import './App.css';
 
+const updateCategories = (categories) => (state) => ({
+  backend: Object.assign({}, state.backend, {
+    categories
+  })
+});
 const updatePosts = (posts) => (state) => ({
   backend: Object.assign({}, state.backend, {
     posts
   })
 });
-const updateCategories = (categories) => (state) => ({
+const updateComments = (comments) => (state) => ({
   backend: Object.assign({}, state.backend, {
-    categories
+    comments
   })
 });
 
@@ -17,34 +22,22 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      postId: undefined,
+
       backend: {
+        categories: [],
         posts: [],
-        categories: []
+        comments: []
       }
     }
   }
 
   componentDidMount() {
-    this.fetchPosts();
     this.fetchCategories();
-  }
-
-  fetchPosts = () => {
-    const url = `${process.env.REACT_APP_BACKEND}/posts`;
-    const header = {
-      headers: {
-        'Authorization': 'whatever-you-want'
-      },
-      // credentials: 'include'
-    };
-
-    fetch(url, header)
-      .then((res) => {
-        return(res.json())
-      })
-      .then((data) => {
-        this.setState(updatePosts(data))
-      });
+    this.fetchPosts();
+    if (this.postId) {
+      this.fetchComments(this.postId);
+    }
   }
 
   fetchCategories = () => {
@@ -65,6 +58,42 @@ class App extends Component {
       });
   }
 
+  fetchPosts = () => {
+    const url = `${process.env.REACT_APP_BACKEND}/posts`;
+    const header = {
+      headers: {
+        'Authorization': 'whatever-you-want'
+      },
+      // credentials: 'include'
+    };
+
+    fetch(url, header)
+      .then((res) => {
+        return(res.json())
+      })
+      .then((data) => {
+        this.setState(updatePosts(data))
+      });
+  }
+
+  fetchComments = (postId) => {
+    const url = `${process.env.REACT_APP_BACKEND}/posts/${postId}/comments`;
+    const header = {
+      headers: {
+        'Authorization': 'whatever-you-want'
+      },
+      // credentials: 'include'
+    };
+
+    fetch(url, header)
+      .then((res) => {
+        return(res.json())
+      })
+      .then((data) => {
+        this.setState(updateComments(data))
+      });
+  }
+
   renderPosts = () => {
     return Posts(this.state.backend);
   }
@@ -77,10 +106,14 @@ class App extends Component {
   }
 
   renderPostDetails = (props) => {
+    const postId = props.match.params.postId;
+    this.postId = postId;
+
     return PostDetails({
       posts: this.state.backend.posts,
+      comments: this.state.backend.comments,
       category: props.match.params.category,
-      postId: props.match.params.postId
+      postId
     });
   }
 
@@ -97,7 +130,32 @@ class App extends Component {
   }
 }
 
-const PostDetails = ({posts, category, postId}) => {
+const VoteScore = ({upVote, downVote}) => {
+  return (
+    <div className="VoteScore">
+      <button onClick={upVote}>+</button>
+      <button onClick={downVote}>-</button>
+    </div>
+  );
+}
+
+const Comments = ({comments}) => {
+  const list = comments.map(comment => (
+    <li key={comment.id}>
+      id: {comment.id}<br />
+      parentId: {comment.parentId}<br />
+      author: {comment.author}<br />
+      body: {comment.body}<br />
+      timestamp: {comment.timestamp}<br />
+      voteScore: {comment.voteScore} <VoteScore /><br />
+      deleted: {comment.deleted.toString()}<br />
+    </li>
+  ));
+
+  return list.length ? <ul>{list}</ul> : <div>no comments</div>
+}
+
+const PostDetails = ({posts, comments, category, postId}) => {
   const post = posts.find(post => post.id === postId);
 
   return post ? (
@@ -108,7 +166,9 @@ const PostDetails = ({posts, category, postId}) => {
         category: {post.category}<br />
         body: {post.body}<br />
         timestamp: {post.timestamp}<br />
-        voteScore: {post.voteScore}
+        voteScore: {post.voteScore} <VoteScore /><br />
+        <br />
+        {Comments({comments})}
       </div>
     ) : <div>none</div>;
 }
@@ -126,7 +186,7 @@ const PostsByCategory = ({posts, category}) => {
         category: {post.category}<br />
         body: {post.body}<br />
         timestamp: {post.timestamp}<br />
-        voteScore: {post.voteScore}
+        voteScore: {post.voteScore} <VoteScore /><br />
       </li>
     );
 
@@ -146,7 +206,7 @@ const Posts = ({posts}) => {
       category: {post.category}<br />
       body: {post.body}<br />
       timestamp: {post.timestamp}<br />
-      voteScore: {post.voteScore}
+      voteScore: {post.voteScore} <VoteScore /><br />
     </li>
   );
 
