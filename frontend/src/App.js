@@ -156,7 +156,8 @@ const Comments = ({comments}) => {
 }
 
 const PostDetails = ({posts, comments, category, postId}) => {
-  const post = posts.find(post => post.id === postId);
+  const post = posts
+    .find(post => post.id === postId && post.category === category);
 
   return post ? (
       <div>
