@@ -4,16 +4,14 @@ import logo from './logo.svg';
 import './App.css';
 
 const updatePosts = (posts) => (state) => ({
-  backend: {
-    ... state.backend,
+  backend: Object.assign({}, state.backend, {
     posts
-  }
+  })
 });
 const updateCategories = (categories) => (state) => ({
-  backend: {
-    ... state.backend,
+  backend: Object.assign({}, state.backend, {
     categories
-  }
+  })
 });
 
 class App extends Component {
@@ -68,44 +66,51 @@ class App extends Component {
       });
   }
 
-  posts = () => {
+  renderPosts = () => {
     return Posts(this.state.backend);
   }
 
-  categories = () => {
-    return Categories(this.state.backend);
+  renderPostsByCategory = (props) => {
+    return PostsByCategory({
+      posts: this.state.backend.posts,
+      category: props.match.params.category
+    });
   }
 
   render() {
     return (
       <div>
+        <Route exact path='/' render={this.renderPosts} />
 
-        <Route exact path='/' render={this.posts} />
-
-        <Route exact path='/categories' render={this.categories} />
-
-        <Route exact path='/posts' render={() => <div>Posts</div>} />
-
-        <Route exact path='/comments' render={() => <div>Comments</div>} />
-
+        <Route exact path='/:category' render={this.renderPostsByCategory} />
       </div>
     );
   }
 }
 
-const Categories = ({categories}) => {
-  const list = categories.map(category =>
-    <li key={category.name}>
-      {category.name}
-    </li>
-  );
+const PostsByCategory = ({posts, category}) => {
+  const list = posts
+    .filter((post) => {
+      return post.category === category
+    })
+    .map(post =>
+      <li key={post.id}>
+        id: {post.id}<br />
+        author: {post.author}<br />
+        title: {post.title}<br />
+        category: {post.category}<br />
+        body: {post.body}<br />
+        timestamp: {post.timestamp}<br />
+        voteScore: {post.voteScore}
+      </li>
+    );
 
   return (
     <ul>
-      {list}
+      {list.length ? list : <li>none</li>}
     </ul>
   );
-};
+}
 
 const Posts = ({posts}) => {
   const list = posts.map(post =>
