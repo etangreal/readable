@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
+import Posts from './components/Posts';
+import PostsByCategory from './components/PostsByCategory';
+import PostDetails from './components/PostDetails';
 import './App.css';
 
 const updateCategories = (categories) => (state) => ({
@@ -106,13 +109,13 @@ class App extends Component {
   }
 
   renderPostDetails = (props) => {
-    const postId = props.match.params.postId;
+    const { category, postId } = props.match.params;
     this.postId = postId;
 
     return PostDetails({
       posts: this.state.backend.posts,
       comments: this.state.backend.comments,
-      category: props.match.params.category,
+      category,
       postId
     });
   }
@@ -128,94 +131,6 @@ class App extends Component {
       </div>
     );
   }
-}
-
-const VoteScore = ({upVote, downVote}) => {
-  return (
-    <div className="VoteScore">
-      <button onClick={upVote}>+</button>
-      <button onClick={downVote}>-</button>
-    </div>
-  );
-}
-
-const Comments = ({comments}) => {
-  const list = comments.map(comment => (
-    <li key={comment.id}>
-      id: {comment.id}<br />
-      parentId: {comment.parentId}<br />
-      author: {comment.author}<br />
-      body: {comment.body}<br />
-      timestamp: {comment.timestamp}<br />
-      voteScore: {comment.voteScore} <VoteScore /><br />
-      deleted: {comment.deleted.toString()}<br />
-    </li>
-  ));
-
-  return list.length ? <ul>{list}</ul> : <div>no comments</div>
-}
-
-const PostDetails = ({posts, comments, category, postId}) => {
-  const post = posts
-    .find(post => post.id === postId && post.category === category);
-
-  return post ? (
-      <div>
-        id: {post.id}<br />
-        author: {post.author}<br />
-        title: {post.title}<br />
-        category: {post.category}<br />
-        body: {post.body}<br />
-        timestamp: {post.timestamp}<br />
-        voteScore: {post.voteScore} <VoteScore /><br />
-        <br />
-        {Comments({comments})}
-      </div>
-    ) : <div>none</div>;
-}
-
-const PostsByCategory = ({posts, category}) => {
-  const list = posts
-    .filter((post) => {
-      return post.category === category
-    })
-    .map(post =>
-      <li key={post.id}>
-        id: {post.id}<br />
-        author: {post.author}<br />
-        title: {post.title}<br />
-        category: {post.category}<br />
-        body: {post.body}<br />
-        timestamp: {post.timestamp}<br />
-        voteScore: {post.voteScore} <VoteScore /><br />
-      </li>
-    );
-
-  return (
-    <ul>
-      {list.length ? list : <li>none</li>}
-    </ul>
-  );
-}
-
-const Posts = ({posts}) => {
-  const list = posts.map(post =>
-    <li key={post.id}>
-      id: {post.id}<br />
-      author: {post.author}<br />
-      title: {post.title}<br />
-      category: {post.category}<br />
-      body: {post.body}<br />
-      timestamp: {post.timestamp}<br />
-      voteScore: {post.voteScore} <VoteScore /><br />
-    </li>
-  );
-
-  return (
-    <ul>
-      {list}
-    </ul>
-  );
 }
 
 export default App;
