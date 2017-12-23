@@ -98,7 +98,9 @@ class App extends Component {
   }
 
   renderPosts = () => {
-    return Posts(this.state.backend);
+    return Posts({
+      posts: this.state.backend.posts
+    });
   }
 
   renderPostsByCategory = (props) => {
