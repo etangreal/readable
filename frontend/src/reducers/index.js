@@ -10,27 +10,36 @@ import {
   DOWNVOTE_COMMENT
 } from '../actions';
 
-const fetched = (state = {}, action) => {
+const categories = (state = [], action) => {
   const { type, payload } = action;
 
   switch (type) {
     case FETCHED_CATEGORIES:
-      return {
-        ...state,
-        categories: payload
-      };
+      return payload;
 
+    default:
+      return state;
+  }
+}
+
+const posts = (state = [], action) => {
+  const { type, payload } = action;
+
+  switch (type) {
     case FETCHED_POSTS:
-      return {
-        ...state,
-        posts: payload
-      };
+      return payload;
 
+    default:
+      return state;
+  }
+}
+
+const comments = (state = [], action) => {
+  const { type, payload } = action;
+
+  switch (type) {
     case FETCHED_COMMENTS:
-      return {
-        ...state,
-        comments: payload
-      };
+      return payload;
 
     default:
       return state;
@@ -66,14 +75,8 @@ function vote (state = {}, action) {
   }
 }
 
-const initialState = {
-  categories: [],
-  posts: [],
-  comments: []
-};
-
 export default combineReducers({
-  init: (store = initialState) => store,
-  fetched,
-  vote
+  categories,
+  posts,
+  comments
 });

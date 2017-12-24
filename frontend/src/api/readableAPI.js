@@ -11,7 +11,9 @@ export const fetchCategories = () => {
   return fetch(url, header)
     .then((res) => {
       return(res.json())
-    })
+    }).then(data => {
+      return data.categories;
+    });
 }
 
 export const fetchPosts = () => {
