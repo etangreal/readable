@@ -6,13 +6,7 @@ import {
   DOWNVOTE_COMMENT
 } from '../actions';
 
-const initialState = {
-  categories: [],
-  posts: [],
-  comments: []
-};
-
-function vote (state = initialState, action) {
+function vote (state = {}, action) {
   const { recipe, type } = action;
 
   switch (type) {
@@ -41,6 +35,13 @@ function vote (state = initialState, action) {
   }
 }
 
+const initialState = {
+  categories: [],
+  posts: [],
+  comments: []
+};
+
 export default combineReducers({
+  init: (store = initialState) => store,
   vote
 });
