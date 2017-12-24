@@ -1,6 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Route } from 'react-router-dom';
+import {
+  fetchCategories,
+  fetchPosts,
+  fetchComments,
+
+  upVotePost,
+  downVotePost
+} from './actions';
 import Posts from './components/Posts';
 import PostsByCategory from './components/PostsByCategory';
 import PostDetails from './components/PostDetails';
@@ -47,6 +55,8 @@ class App extends Component {
   componentDidMount() {
     this.fetchCategories();
     this.fetchPosts();
+    this.props.fetchCategories();
+    this.props.fetchPosts();
     if (this.postId) {
       this.fetchComments(this.postId);
     }
@@ -148,7 +158,7 @@ class App extends Component {
 // REDUX
 // ------------------------------------------------------------------------------------------------
 
-function mapStateToProps ({ categories, posts, comments }) {
+function mapStateToProps({ categories, posts, comments }) {
   return {
     categories,
     posts,
@@ -156,8 +166,12 @@ function mapStateToProps ({ categories, posts, comments }) {
   };
 }
 
-function mapDispatchToProps (dispatch) {
+function mapDispatchToProps(dispatch) {
   return {
+    fetchCategories: (categories) => dispatch(fetchCategories(categories)),
+    fetchPosts: (posts) => dispatch(fetchPosts(posts)),
+    upVotePost: (post) => dispatch(upVotePost(post)),
+    downVotePost: (post) => dispatch(downVotePost(post))
   };
 }
 
