@@ -1,7 +1,5 @@
 import React from 'react';
 import Post from './Post';
-import Comments from './Comments';
-import VoteScore from './VoteScore';
 
 const PostDetails = ({posts, comments, category, postId}) => {
   const post = posts.find(

@@ -29,6 +29,18 @@ const posts = (state = [], action) => {
     case FETCHED_POSTS:
       return payload;
 
+    case UPVOTE_POST:
+      return [
+        ...state.filter(post => payload.id !== post.id),
+        payload
+      ];
+
+    case DOWNVOTE_POST:
+      return [
+        ...state.filter(post => payload.id !== post.id),
+        payload
+      ];
+
     default:
       return state;
   }
@@ -40,35 +52,6 @@ const comments = (state = [], action) => {
   switch (type) {
     case FETCHED_COMMENTS:
       return payload;
-
-    default:
-      return state;
-  }
-}
-
-function vote (state = {}, action) {
-  const { type, payload } = action;
-
-  switch (type) {
-    case UPVOTE_POST:
-      return {
-        ...state
-      };
-
-    case DOWNVOTE_POST:
-      return {
-        ...state
-      };
-
-    case UPVOTE_COMMENT:
-      return {
-        ...state
-      };
-
-    case DOWNVOTE_COMMENT:
-      return {
-        ...state
-      };
 
     default:
       return state;

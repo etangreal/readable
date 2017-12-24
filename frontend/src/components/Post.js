@@ -2,7 +2,7 @@ import React from 'react';
 import VoteScore from './VoteScore';
 import Comments from './Comments';
 
-const Post = ({post, comments}) => {
+const Post = ({post, comments, actions}) => {
   return (
     <div>
       id: {post.id}<br />
@@ -11,7 +11,11 @@ const Post = ({post, comments}) => {
       category: {post.category}<br />
       body: {post.body}<br />
       timestamp: {post.timestamp}<br />
-      voteScore: {post.voteScore} <VoteScore /><br />
+      voteScore: {post.voteScore}
+      <VoteScore
+        upVote={actions.upVotePost(post)}
+        downVote={actions.downVotePost(post)}
+      /><br />
       {comments && Comments({comments})}
     </div>
   );

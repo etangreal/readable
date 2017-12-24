@@ -58,28 +58,30 @@ export const fetchComments = postId => dispatch => (
 // VOTE
 // ------------------------------------------------------------------------------------------------
 
-export function upVotePost ({ post }) {
-  return {
-    type: UPVOTE_POST,
-    payload: post
-  }
-}
+export const upVotePost = postId => dispatch =>
+  readableAPI
+    .upVotePost(postId)
+    .then(post => dispatch({
+      type: UPVOTE_POST,
+      payload: post
+    }));
 
-export function downVotePost ({ post }) {
-  return {
-    type: DOWNVOTE_POST,
-    payload: post
-  }
-}
+export const downVotePost = postId => dispatch =>
+  readableAPI
+    .downVotePost(postId)
+    .then(post => dispatch({
+      type: DOWNVOTE_POST,
+      payload: post
+    }));
 
-export function upVoteComment ({ comment }) {
+export function upVoteComment (comment) {
     return {
       type: UPVOTE_COMMENT,
       payload: comment
     }
 }
 
-export function downVoteComment ({ comment }) {
+export function downVoteComment (comment) {
     return {
       type: UPVOTE_COMMENT,
       payload: comment

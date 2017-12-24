@@ -36,7 +36,11 @@ class App extends Component {
 
   renderPosts = () => {
     return Posts({
-      posts: this.props.posts
+      posts: this.props.posts,
+      actions: {
+        upVotePost: this.props.upVotePost,
+        downVotePost: this.props.downVotePost
+      }
     });
   }
 
@@ -88,8 +92,8 @@ function mapDispatchToProps(dispatch) {
     fetchPosts: (posts) => dispatch(fetchPosts(posts)),
     fetchComments: (comments) => dispatch(fetchComments(comments)),
 
-    upVotePost: (post) => dispatch(upVotePost(post)),
-    downVotePost: (post) => dispatch(downVotePost(post))
+    upVotePost: (post) => () => dispatch(upVotePost(post)),
+    downVotePost: (post) => () => dispatch(downVotePost(post))
   };
 }
 
