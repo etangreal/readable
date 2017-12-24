@@ -1,22 +1,18 @@
 import React from 'react';
-import VoteScore from './VoteScore';
+import Comment from './Comment';
 
 const Comments = ({comments}) => {
-  console.log(comments);
-
-  const list = comments.map(comment => (
+  const list = comments ? comments.map(comment => (
     <li key={comment.id}>
-      id: {comment.id}<br />
-      parentId: {comment.parentId}<br />
-      author: {comment.author}<br />
-      body: {comment.body}<br />
-      timestamp: {comment.timestamp}<br />
-      voteScore: {comment.voteScore} <VoteScore /><br />
-      deleted: {comment.deleted.toString()}<br />
+      {Comment({comment})}
     </li>
-  ));
+  )) : undefined;
 
-  return list.length ? <ul>{list}</ul> : <div>no comments</div>
+  return (
+    <ul>
+      {list && list.length ? list : <li>no comments</li>}
+    </ul>
+  )
 }
 
 export default Comments;
