@@ -45,57 +45,17 @@ class App extends Component {
       postId: undefined,
 
       backend: {
-        categories: [],
-        posts: [],
         comments: []
       }
     }
   }
 
   componentDidMount() {
-    this.fetchCategories();
-    this.fetchPosts();
     this.props.fetchCategories();
     this.props.fetchPosts();
     if (this.postId) {
       this.fetchComments(this.postId);
     }
-  }
-
-  fetchCategories = () => {
-    const url = `${process.env.REACT_APP_BACKEND}/categories`;
-    const header = {
-      headers: {
-        'Authorization': 'whatever-you-want'
-      },
-      // credentials: 'include'
-    };
-
-    fetch(url, header)
-      .then((res) => {
-        return(res.json())
-      })
-      .then((data) => {
-        this.setState(updateCategories(data))
-      });
-  }
-
-  fetchPosts = () => {
-    const url = `${process.env.REACT_APP_BACKEND}/posts`;
-    const header = {
-      headers: {
-        'Authorization': 'whatever-you-want'
-      },
-      // credentials: 'include'
-    };
-
-    fetch(url, header)
-      .then((res) => {
-        return(res.json())
-      })
-      .then((data) => {
-        this.setState(updatePosts(data))
-      });
   }
 
   fetchComments = (postId) => {
@@ -118,13 +78,13 @@ class App extends Component {
 
   renderPosts = () => {
     return Posts({
-      posts: this.state.backend.posts
+      posts: this.props.posts
     });
   }
 
   renderPostsByCategory = (props) => {
     return PostsByCategory({
-      posts: this.state.backend.posts,
+      posts: this.props.posts,
       category: props.match.params.category
     });
   }
@@ -134,7 +94,7 @@ class App extends Component {
     this.postId = postId;
 
     return PostDetails({
-      posts: this.state.backend.posts,
+      posts: this.props.posts,
       comments: this.state.backend.comments,
       category,
       postId
