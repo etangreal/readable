@@ -15,26 +15,6 @@ import PostDetails from './components/PostDetails';
 import './App.css';
 
 // ------------------------------------------------------------------------------------------------
-// FUNCTIONS
-// ------------------------------------------------------------------------------------------------
-
-const updateCategories = (categories) => (state) => ({
-  backend: Object.assign({}, state.backend, {
-    categories
-  })
-});
-const updatePosts = (posts) => (state) => ({
-  backend: Object.assign({}, state.backend, {
-    posts
-  })
-});
-const updateComments = (comments) => (state) => ({
-  backend: Object.assign({}, state.backend, {
-    comments
-  })
-});
-
-// ------------------------------------------------------------------------------------------------
 // APP
 // ------------------------------------------------------------------------------------------------
 
@@ -42,11 +22,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      postId: undefined,
-
-      backend: {
-        comments: []
-      }
+      postId: undefined
     }
   }
 
@@ -54,26 +30,8 @@ class App extends Component {
     this.props.fetchCategories();
     this.props.fetchPosts();
     if (this.postId) {
-      this.fetchComments(this.postId);
+      this.props.fetchComments(this.postId);
     }
-  }
-
-  fetchComments = (postId) => {
-    const url = `${process.env.REACT_APP_BACKEND}/posts/${postId}/comments`;
-    const header = {
-      headers: {
-        'Authorization': 'whatever-you-want'
-      },
-      // credentials: 'include'
-    };
-
-    fetch(url, header)
-      .then((res) => {
-        return(res.json())
-      })
-      .then((data) => {
-        this.setState(updateComments(data))
-      });
   }
 
   renderPosts = () => {
@@ -95,7 +53,7 @@ class App extends Component {
 
     return PostDetails({
       posts: this.props.posts,
-      comments: this.state.backend.comments,
+      comments: this.props.comments,
       category,
       postId
     });
@@ -105,9 +63,7 @@ class App extends Component {
     return (
       <div>
         <Route exact path='/' render={this.renderPosts} />
-
         <Route exact path='/:category' render={this.renderPostsByCategory} />
-
         <Route exact path='/:category/:postId' render={this.renderPostDetails} />
       </div>
     );
@@ -130,6 +86,8 @@ function mapDispatchToProps(dispatch) {
   return {
     fetchCategories: (categories) => dispatch(fetchCategories(categories)),
     fetchPosts: (posts) => dispatch(fetchPosts(posts)),
+    fetchComments: (comments) => dispatch(fetchComments(comments)),
+
     upVotePost: (post) => dispatch(upVotePost(post)),
     downVotePost: (post) => dispatch(downVotePost(post))
   };
