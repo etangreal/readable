@@ -1,9 +1,14 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Route } from 'react-router-dom';
 import Posts from './components/Posts';
 import PostsByCategory from './components/PostsByCategory';
 import PostDetails from './components/PostDetails';
 import './App.css';
+
+// ------------------------------------------------------------------------------------------------
+// FUNCTIONS
+// ------------------------------------------------------------------------------------------------
 
 const updateCategories = (categories) => (state) => ({
   backend: Object.assign({}, state.backend, {
@@ -20,6 +25,10 @@ const updateComments = (comments) => (state) => ({
     comments
   })
 });
+
+// ------------------------------------------------------------------------------------------------
+// APP
+// ------------------------------------------------------------------------------------------------
 
 class App extends Component {
   constructor(props) {
@@ -135,4 +144,25 @@ class App extends Component {
   }
 }
 
-export default App;
+// ------------------------------------------------------------------------------------------------
+// REDUX
+// ------------------------------------------------------------------------------------------------
+
+function mapStateToProps ({ categories, posts, comments }) {
+  return {
+    categories,
+    posts,
+    comments
+  };
+}
+
+function mapDispatchToProps (dispatch) {
+  return {
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
+
+// ------------------------------------------------------------------------------------------------
+// END
+// ------------------------------------------------------------------------------------------------
