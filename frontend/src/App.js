@@ -7,7 +7,9 @@ import {
   fetchComments,
 
   upVotePost,
-  downVotePost
+  downVotePost,
+  upVoteComment,
+  downVoteComment
 } from './actions';
 import Posts from './components/Posts';
 import PostsByCategory from './components/PostsByCategory';
@@ -39,7 +41,9 @@ class App extends Component {
       posts: this.props.posts,
       actions: {
         upVotePost: this.props.upVotePost,
-        downVotePost: this.props.downVotePost
+        downVotePost: this.props.downVotePost,
+        upVoteComment: this.props.upVoteComment,
+        downVoteComment: this.props.downVoteComment
       }
     });
   }
@@ -47,7 +51,13 @@ class App extends Component {
   renderPostsByCategory = (props) => {
     return PostsByCategory({
       posts: this.props.posts,
-      category: props.match.params.category
+      category: props.match.params.category,
+      actions: {
+        upVotePost: this.props.upVotePost,
+        downVotePost: this.props.downVotePost,
+        upVoteComment: this.props.upVoteComment,
+        downVoteComment: this.props.downVoteComment
+      }
     });
   }
 
@@ -59,7 +69,13 @@ class App extends Component {
       posts: this.props.posts,
       comments: this.props.comments,
       category,
-      postId
+      postId,
+      actions: {
+        upVotePost: this.props.upVotePost,
+        downVotePost: this.props.downVotePost,
+        upVoteComment: this.props.upVoteComment,
+        downVoteComment: this.props.downVoteComment
+      }
     });
   }
 
@@ -93,7 +109,9 @@ function mapDispatchToProps(dispatch) {
     fetchComments: (comments) => dispatch(fetchComments(comments)),
 
     upVotePost: (post) => () => dispatch(upVotePost(post)),
-    downVotePost: (post) => () => dispatch(downVotePost(post))
+    downVotePost: (post) => () => dispatch(downVotePost(post)),
+    upVoteComment: (comment) => () => dispatch(upVoteComment(comment)),
+    downVoteComment: (comment) => () => dispatch(downVoteComment(comment))
   };
 }
 

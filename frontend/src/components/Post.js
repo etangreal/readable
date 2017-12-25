@@ -16,7 +16,7 @@ const Post = ({post, comments, actions}) => {
         upVote={actions.upVotePost(post)}
         downVote={actions.downVotePost(post)}
       /><br />
-      {comments && Comments({comments})}
+      {comments && Comments({comments, actions})}
     </div>
   );
 };

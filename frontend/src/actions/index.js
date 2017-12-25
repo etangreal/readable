@@ -74,19 +74,25 @@ export const downVotePost = postId => dispatch =>
       payload: post
     }));
 
-export function upVoteComment (comment) {
-    return {
-      type: UPVOTE_COMMENT,
-      payload: comment
-    }
-}
+// ------------------------------------------------------------------------------------------------
+// COMMENT
+// ------------------------------------------------------------------------------------------------
 
-export function downVoteComment (comment) {
-    return {
+export const upVoteComment = commentId => dispatch =>
+  readableAPI
+    .upVoteComment(commentId)
+    .then(comment => dispatch({
       type: UPVOTE_COMMENT,
       payload: comment
-    }
-}
+    }));
+
+export const downVoteComment = commentId => dispatch =>
+  readableAPI
+    .downVoteComment(commentId)
+    .then(comment => dispatch({
+      type: DOWNVOTE_COMMENT,
+      payload: comment
+    }));
 
 // ------------------------------------------------------------------------------------------------
 // END
