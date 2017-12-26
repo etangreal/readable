@@ -2,6 +2,16 @@ import React from 'react';
 import VoteScore from './VoteScore';
 import Comments from './Comments';
 
+export const post = () => ({
+  id: '',
+  author: '',
+  title: '',
+  category: '',
+  body: '',
+  timestamp: Date.now(),
+  voteScore: 0
+})
+
 const Post = ({post, comments, actions}) => (
   <div>
     <button onClick={actions.editPost(post)}>
