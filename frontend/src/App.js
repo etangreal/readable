@@ -82,6 +82,7 @@ class App extends Component {
   render() {
     return (
       <div>
+        <br />
         <Route exact path='/' render={this.renderPosts} />
         <Route exact path='/:category' render={this.renderPostsByCategory} />
         <Route exact path='/:category/:postId' render={this.renderPostDetails} />

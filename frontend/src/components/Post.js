@@ -5,6 +5,13 @@ import Comments from './Comments';
 const Post = ({post, comments, actions}) => {
   return (
     <div>
+      <button onClick={() => console.log('Edit Post')}>
+        <i className="far fa-pen"></i>&nbsp;
+      </button>
+      <button onClick={() => console.log('Delete Post')}>
+        <i className="far fa-trash"></i>&nbsp;
+      </button>
+      <br />
       id: {post.id}<br />
       author: {post.author}<br />
       title: {post.title}<br />

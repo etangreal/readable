@@ -12,6 +12,11 @@ const Posts = ({posts, actions}) => {
 
   return (
     <ul>
+      <li>
+        <button onClick={() => console.log('Add Post')}>
+          <i className="far fa-plus"></i>&nbsp;
+        </button>
+      </li>
       {list}
     </ul>
   );
