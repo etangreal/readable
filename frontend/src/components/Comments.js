@@ -12,7 +12,7 @@ const Comments = ({comments, actions}) => {
 
   return (
     <ul>
-      {list && list.length ? list : <li>no comments</li>}
+      {list && list.length ? list : ''}
       <li>
         <button onClick={actions.addComment}>
           <i className="far fa-plus"></i>
