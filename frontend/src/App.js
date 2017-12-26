@@ -36,15 +36,54 @@ class App extends Component {
     }
   }
 
+  addPost = () => {
+    console.log('Add Post');
+  }
+
+  editPost = (post) => () => {
+    console.log('Edit Post');
+  }
+
+  cancelPost = () => {
+    console.log('Cancel Post');
+  }
+
+  addComment = () => {
+    console.log('Add Comment');
+  }
+
+  editComment = (comment) => () => {
+    console.log('Edit Comment');
+  }
+
+  cancelComment = () => {
+    console.log('Cancel Comment');
+  }
+
+  actions = () => ({
+      upVotePost: this.props.upVotePost,
+      downVotePost: this.props.downVotePost,
+      addPost: this.addPost,
+      editPost: this.editPost,
+      cancelPost: this.cancelPost,
+      createPost: this.props.addPost,
+      updatePost: this.props.editPost,
+      deletePost: this.props.deletePost,
+
+      upVoteComment: this.props.upVoteComment,
+      downVoteComment: this.props.downVoteComment,
+      addComment: this.addComment,
+      editComment: this.editComment,
+      cancelComment: this.cancelComment,
+      createComment: this.props.addComment,
+      updateComment: this.props.editComment,
+      deleteComment: this.props.deleteComment,
+  })
+
   renderPosts = () => {
     return Posts({
       posts: this.props.posts,
-      actions: {
-        upVotePost: this.props.upVotePost,
-        downVotePost: this.props.downVotePost,
-        upVoteComment: this.props.upVoteComment,
-        downVoteComment: this.props.downVoteComment
-      }
+      actions: this.actions()
     });
   }
 
@@ -52,12 +91,7 @@ class App extends Component {
     return PostsByCategory({
       posts: this.props.posts,
       category: props.match.params.category,
-      actions: {
-        upVotePost: this.props.upVotePost,
-        downVotePost: this.props.downVotePost,
-        upVoteComment: this.props.upVoteComment,
-        downVoteComment: this.props.downVoteComment
-      }
+      actions: this.actions()
     });
   }
 
@@ -70,12 +104,7 @@ class App extends Component {
       comments: this.props.comments,
       category,
       postId,
-      actions: {
-        upVotePost: this.props.upVotePost,
-        downVotePost: this.props.downVotePost,
-        upVoteComment: this.props.upVoteComment,
-        downVoteComment: this.props.downVoteComment
-      }
+      actions: this.actions()
     });
   }
 
@@ -106,13 +135,20 @@ function mapStateToProps({ categories, posts, comments }) {
 function mapDispatchToProps(dispatch) {
   return {
     fetchCategories: (categories) => dispatch(fetchCategories(categories)),
-    fetchPosts: (posts) => dispatch(fetchPosts(posts)),
-    fetchComments: (comments) => dispatch(fetchComments(comments)),
 
+    fetchPosts: (posts) => dispatch(fetchPosts(posts)),
     upVotePost: (post) => () => dispatch(upVotePost(post)),
     downVotePost: (post) => () => dispatch(downVotePost(post)),
+    createPost: (post) => () => console.log('Create Post'),
+    updatePost: (post) => () => console.log('Update Post'),
+    deletePost: (post) => () => console.log('Delete Post'),
+
+    fetchComments: (comments) => dispatch(fetchComments(comments)),
     upVoteComment: (comment) => () => dispatch(upVoteComment(comment)),
-    downVoteComment: (comment) => () => dispatch(downVoteComment(comment))
+    downVoteComment: (comment) => () => dispatch(downVoteComment(comment)),
+    createComment: (comment) => () => console.log('Create Comment'),
+    updateComment: (comment) => () => console.log('Update Comment'),
+    deleteComment: (comment) => () => console.log('Delete Comment'),
   };
 }
 

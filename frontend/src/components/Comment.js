@@ -3,6 +3,13 @@ import VoteScore from './VoteScore';
 
 const Comment = ({comment, actions}) => (
   <div>
+    <button onClick={actions.editComment(comment)}>
+      <i className="far fa-pen"></i>
+    </button>
+    <button onClick={actions.deleteComment(comment)}>
+      <i className="far fa-trash"></i>
+    </button>
+    <br />
     id: {comment.id}<br />
     parentId: {comment.parentId}<br />
     author: {comment.author}<br />
