@@ -11,9 +11,8 @@ import {
   upVoteComment,
   downVoteComment
 } from './actions';
+import Post from './components/Post';
 import Posts from './components/Posts';
-import PostsByCategory from './components/PostsByCategory';
-import PostDetails from './components/PostDetails';
 import './App.css';
 
 // ------------------------------------------------------------------------------------------------
@@ -24,7 +23,8 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      postId: undefined
+      post: undefined,
+      comment: undefined
     }
   }
 
@@ -87,25 +87,29 @@ class App extends Component {
     });
   }
 
-  renderPostsByCategory = (props) => {
-    return PostsByCategory({
-      posts: this.props.posts,
-      category: props.match.params.category,
+  renderPostsByCategory = (props) =>
+    Posts({
+      posts: this.props.posts.filter((post) => {
+          return post.category === props.match.params.category
+        }),
       actions: this.actions()
     });
-  }
 
   renderPostDetails = (props) => {
     const { category, postId } = props.match.params;
     this.postId = postId;
+    const post = this.props.posts.find(
+      post => post.id === postId &&
+      post.category === category
+    );
 
-    return PostDetails({
-      posts: this.props.posts,
-      comments: this.props.comments,
-      category,
-      postId,
-      actions: this.actions()
-    });
+    return post ?
+      Post({
+        post,
+        comments: this.props.comments,
+        actions: this.actions()
+      })
+      : <div>none</div>;
   }
 
   render() {
