@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const Navigation = ({categories}) => {
+const Navigation = ({categories, addPost}) => {
   const categoryLinks = categories.map(category => {
     return (
       <li key={category.path}>
@@ -12,8 +12,8 @@ const Navigation = ({categories}) => {
 
   return (
     <ul>
-      <li><Link to="/">Home</Link></li>
-      <li><Link to="/">Add Post</Link></li>
+      <li><Link to="/">Posts</Link></li>
+      <li><Link to="/" onClick={addPost}>Add Post</Link></li>
       {categoryLinks}
     </ul>
   );

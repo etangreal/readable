@@ -203,7 +203,9 @@ class App extends Component {
     return (
       <div>
         <Navigation
-          categories={this.props.categories} />
+          categories={this.props.categories}
+          addPost={this.addPost}
+        />
         <Switch>
           <Route exact path='/' render={this.renderPosts} />
           <Route path='/:category' render={this.renderPostsByCategory} />
