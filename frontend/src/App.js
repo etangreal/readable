@@ -4,11 +4,14 @@ import { Route } from 'react-router-dom';
 import Modal from 'react-modal';
 import {
   fetchCategories,
-  fetchPosts,
-  fetchComments,
 
+  fetchPosts,
   upVotePost,
   downVotePost,
+  createPost,
+  deletePost,
+
+  fetchComments,
   upVoteComment,
   downVoteComment
 } from './actions';
@@ -244,9 +247,9 @@ function mapDispatchToProps(dispatch) {
     fetchPosts: (posts) => dispatch(fetchPosts(posts)),
     upVotePost: (post) => () => dispatch(upVotePost(post)),
     downVotePost: (post) => () => dispatch(downVotePost(post)),
-    createPost: (post) => console.log('Create Post', JSON.stringify(post)),
+    createPost: (post) => dispatch(createPost(post)),
     updatePost: (post) => console.log('Update Post', JSON.stringify(post)),
-    deletePost: (post) => () => console.log('Delete Post', JSON.stringify(post)),
+    deletePost: (postId) => () => dispatch(deletePost(postId)),
 
     fetchComments: (comments) => dispatch(fetchComments(comments)),
     upVoteComment: (comment) => () => dispatch(upVoteComment(comment)),

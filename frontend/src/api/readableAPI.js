@@ -79,6 +79,48 @@ export const downVotePost = (post) => {
     });
 }
 
+export const createPost = (post) => {
+  const url = `${process.env.REACT_APP_BACKEND}/posts`;
+  const config = {
+    method: 'POST',
+    headers: {
+      'Authorization': 'whatever-you-want',
+      'Content-Type': 'application/json'
+    },
+    // credentials: 'include'
+    body: JSON.stringify({
+      id: post.id,
+      author: post.author,
+      title: post.title,
+      category: post.category,
+      body: post.body,
+      timestamp: post.timestamp
+    })
+  };
+
+  return fetch(url, config)
+    .then((res) => {
+      return(res.json())
+    })
+}
+
+export const deletePost = (postId) => {
+  const url = `${process.env.REACT_APP_BACKEND}/posts/${postId}`;
+  const config = {
+    method: 'DELETE',
+    headers: {
+      'Authorization': 'whatever-you-want',
+      'Content-Type': 'application/json'
+    },
+    // credentials: 'include'
+  };
+
+  return fetch(url, config)
+    .then((res) => {
+      return res.ok ? postId : undefined;
+    })
+}
+
 // ------------------------------------------------------------------------------------------------
 // COMMENTS
 // ------------------------------------------------------------------------------------------------

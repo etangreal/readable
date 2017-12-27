@@ -4,79 +4,92 @@ import * as readableAPI from '../api/readableAPI';
 // DECLARATIONS
 // ------------------------------------------------------------------------------------------------
 
-export const FETCHED_CATEGORIES = 'FETCHED_CATEGORIES';
-export const FETCHED_POSTS = 'FETCHED_POSTS';
-export const FETCHED_COMMENTS = 'FETCHED_COMMENTS';
+export const FETCH_CATEGORIES = 'FETCH_CATEGORIES';
 
+export const FETCH_POSTS = 'FETCH_POSTS';
 export const UPVOTE_POST = 'UPVOTE_POST';
 export const DOWNVOTE_POST = 'DOWNVOTE_POST';
+export const CREATE_POST = 'CREATE_POST';
+export const DELETE_POST = 'DELETE_POST';
+
+export const FETCH_COMMENTS = 'FETCH_COMMENTS';
 export const UPVOTE_COMMENT = 'UPVOTE_COMMENT';
 export const DOWNVOTE_COMMENT = 'DOWNVOTE_COMMENT';
 
 // ------------------------------------------------------------------------------------------------
-// FETCHED
+// CATEGORIES
 // ------------------------------------------------------------------------------------------------
-
-export const fetchedCategories = categories => ({
-  type: FETCHED_CATEGORIES,
-  payload: categories
-});
 
 export const fetchCategories = () => dispatch => (
   readableAPI
-      .fetchCategories()
-      .then(categories => dispatch(fetchedCategories(categories)))
+    .fetchCategories()
+    .then(categories => dispatch({
+      type: FETCH_CATEGORIES,
+      payload: categories
+    }))
 );
 
 // ------------------------------------------------------------------------------------------------
-
-export const fetchedPosts = posts => ({
-  type: FETCHED_POSTS,
-  payload: posts
-});
+// POSTS
+// ------------------------------------------------------------------------------------------------
 
 export const fetchPosts = () => dispatch => (
   readableAPI
-      .fetchPosts()
-      .then(posts => dispatch(fetchedPosts(posts)))
+    .fetchPosts()
+    .then(posts => dispatch({
+      type: FETCH_POSTS,
+      payload: posts
+    }))
 );
 
-// ------------------------------------------------------------------------------------------------
-
-export const fetchedComments = comments => ({
-  type: FETCHED_COMMENTS,
-  payload: comments
-});
-
-export const fetchComments = postId => dispatch => (
-  readableAPI
-      .fetchComments(postId)
-      .then(comments => dispatch(fetchedComments(comments)))
-);
-
-// ------------------------------------------------------------------------------------------------
-// VOTE
-// ------------------------------------------------------------------------------------------------
-
-export const upVotePost = postId => dispatch =>
+export const upVotePost = postId => dispatch => (
   readableAPI
     .upVotePost(postId)
     .then(post => dispatch({
       type: UPVOTE_POST,
       payload: post
-    }));
+    }))
+);
 
-export const downVotePost = postId => dispatch =>
+export const downVotePost = postId => dispatch => (
   readableAPI
     .downVotePost(postId)
     .then(post => dispatch({
       type: DOWNVOTE_POST,
       payload: post
-    }));
+    }))
+);
+
+export const createPost = (post) => dispatch => (
+  readableAPI
+    .createPost(post)
+    .then(posts => dispatch({
+      type: CREATE_POST,
+      payload: posts
+    }))
+);
+
+export const deletePost = (postId) => dispatch => (
+  readableAPI
+    .deletePost(postId)
+    .then(Id => dispatch({
+      type: DELETE_POST,
+      payload: Id
+    }))
+);
 
 // ------------------------------------------------------------------------------------------------
-// COMMENT
+// COMMENTS
 // ------------------------------------------------------------------------------------------------
+
+export const fetchComments = postId => dispatch => (
+  readableAPI
+    .fetchComments(postId)
+    .then(comments => dispatch({
+      type: FETCH_COMMENTS,
+      payload: comments
+    }))
+);
 
 export const upVoteComment = commentId => dispatch =>
   readableAPI

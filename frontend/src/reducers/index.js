@@ -1,11 +1,14 @@
 import { combineReducers } from 'redux';
 import {
-  FETCHED_CATEGORIES,
-  FETCHED_POSTS,
-  FETCHED_COMMENTS,
+  FETCH_CATEGORIES,
 
+  FETCH_POSTS,
   UPVOTE_POST,
   DOWNVOTE_POST,
+  CREATE_POST,
+  DELETE_POST,
+
+  FETCH_COMMENTS,
   UPVOTE_COMMENT,
   DOWNVOTE_COMMENT
 } from '../actions';
@@ -14,7 +17,7 @@ const categories = (state = [], action) => {
   const { type, payload } = action;
 
   switch (type) {
-    case FETCHED_CATEGORIES:
+    case FETCH_CATEGORIES:
       return payload;
 
     default:
@@ -26,7 +29,7 @@ const posts = (state = [], action) => {
   const { type, payload } = action;
 
   switch (type) {
-    case FETCHED_POSTS:
+    case FETCH_POSTS:
       return payload;
 
     case UPVOTE_POST:
@@ -41,6 +44,17 @@ const posts = (state = [], action) => {
         payload
       ];
 
+    case CREATE_POST:
+      return [...state, payload];
+
+    case DELETE_POST:
+      if (payload)
+        return [
+          ...state.filter(post => post.id !== payload),
+          Object.assign({}, state.find(post => post.id === payload), {deleted: true})
+        ];
+      return state;
+
     default:
       return state;
   }
@@ -50,7 +64,7 @@ const comments = (state = [], action) => {
   const { type, payload } = action;
 
   switch (type) {
-    case FETCHED_COMMENTS:
+    case FETCH_COMMENTS:
       return payload;
 
     case UPVOTE_COMMENT:

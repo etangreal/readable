@@ -10,7 +10,8 @@ export const post = () => ({
   category: '',
   body: '',
   timestamp: Date.now(),
-  voteScore: 0
+  voteScore: 0,
+  deleted: false
 });
 
 const Post = ({post, comments, actions}) => (
@@ -18,7 +19,7 @@ const Post = ({post, comments, actions}) => (
     <button onClick={actions.editPost(post)}>
       <i className="far fa-pen"></i>
     </button>
-    <button onClick={actions.deletePost(post)}>
+    <button onClick={actions.deletePost(post.id)}>
       <i className="far fa-trash"></i>
     </button>
     <br />
@@ -33,6 +34,7 @@ const Post = ({post, comments, actions}) => (
       upVote={actions.upVotePost(post)}
       downVote={actions.downVotePost(post)}
     /><br />
+    deleted: {post.deleted.toString()}
     {comments && Comments({comments, postId: post.id, actions})}
   </div>
 );
