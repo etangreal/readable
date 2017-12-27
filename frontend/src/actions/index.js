@@ -101,21 +101,23 @@ export const fetchComments = postId => dispatch => (
     }))
 );
 
-export const upVoteComment = commentId => dispatch =>
+export const upVoteComment = commentId => dispatch => (
   readableAPI
     .upVoteComment(commentId)
     .then(comment => dispatch({
       type: UPVOTE_COMMENT,
       payload: comment
-    }));
+    }))
+);
 
-export const downVoteComment = commentId => dispatch =>
+export const downVoteComment = commentId => dispatch => (
   readableAPI
     .downVoteComment(commentId)
     .then(comment => dispatch({
       type: DOWNVOTE_COMMENT,
       payload: comment
-    }));
+    }))
+);
 
 // ------------------------------------------------------------------------------------------------
 // END
