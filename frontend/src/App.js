@@ -78,7 +78,6 @@ class App extends Component {
       isPostEdit: false,
       post: post()
     });
-    console.log('Add Post');
   }
 
   editPost = (post) => () => {
@@ -87,7 +86,6 @@ class App extends Component {
       isPostEdit: true,
       post: Object.assign({}, post)
     });
-    console.log('Edit Post');
   }
 
   updatePost = (field, value) => this.setState(updatePostState(field, value))
@@ -101,7 +99,6 @@ class App extends Component {
       isPostEdit: false,
       post: undefined
     });
-    console.log('Save Post');
   }
 
   cancelPost = () => {
@@ -110,7 +107,6 @@ class App extends Component {
       isPostEdit: false,
       post: undefined
     });
-    console.log('Cancel Post');
   }
 
   // ----------------------------------------------------------------------------------------------
@@ -121,7 +117,6 @@ class App extends Component {
       isCommentEdit: false,
       comment: Object.assign(comment(), {parentId: postId})
     });
-    console.log('Add Comment');
   }
 
   editComment = (comment) => () => {
@@ -130,7 +125,6 @@ class App extends Component {
       isCommentEdit: true,
       comment: Object.assign({}, comment)
     });
-    console.log('Edit Comment');
   }
 
   updateComment = (field, value) => this.setState(updateCommentState(field, value))
@@ -144,7 +138,6 @@ class App extends Component {
       isCommentEdit: false,
       comment: undefined
     });
-    console.log('Save Comment');
   }
 
   cancelComment = () => {
@@ -153,7 +146,6 @@ class App extends Component {
       isCommentEdit: false,
       comment: undefined
     });
-    console.log('Cancel Comment');
   }
 
   // ----------------------------------------------------------------------------------------------
@@ -181,13 +173,14 @@ class App extends Component {
     });
   }
 
-  renderPostsByCategory = (props) =>
+  renderPostsByCategory = (props) => (
     Posts({
       posts: this.props.posts.filter((post) => {
           return post.category === props.match.params.category
         }),
       actions: this.actions()
-    });
+    })
+  )
 
   renderPostDetails = (props) => {
     const { category, postId } = props.match.params;
