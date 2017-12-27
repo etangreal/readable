@@ -13,8 +13,8 @@ export const fetchCategories = () => {
   };
 
   return fetch(url, header)
-    .then((res) => {
-      return(res.json())
+    .then(res => {
+      return res.json()
     }).then(data => {
       return data.categories;
     });
@@ -34,8 +34,8 @@ export const fetchPosts = () => {
   };
 
   return fetch(url, header)
-    .then((res) => {
-      return(res.json())
+    .then(res => {
+      return res.json()
     })
 }
 
@@ -54,8 +54,8 @@ export const upVotePost = (post) => {
   };
 
   return fetch(url, config)
-    .then((res) => {
-      return(res.json())
+    .then(res => {
+      return res.json()
     })
 }
 
@@ -74,8 +74,8 @@ export const downVotePost = (post) => {
   };
 
   return fetch(url, config)
-    .then((res) => {
-      return(res.json())
+    .then(res => {
+      return res.json()
     });
 }
 
@@ -99,8 +99,8 @@ export const createPost = (post) => {
   };
 
   return fetch(url, config)
-    .then((res) => {
-      return(res.json())
+    .then(res => {
+      return res.json()
     })
 }
 
@@ -120,7 +120,7 @@ export const updatePost = (post) => {
   };
 
   return fetch(url, config)
-    .then((res) => {
+    .then(res => {
       return(res.json())
     })
 }
@@ -137,7 +137,7 @@ export const deletePost = (postId) => {
   };
 
   return fetch(url, config)
-    .then((res) => {
+    .then( res => {
       return res.ok ? postId : undefined;
     })
 }
@@ -156,8 +156,8 @@ export const fetchComments = postId => {
   };
 
   return fetch(url, header)
-    .then((res) => {
-      return(res.json())
+    .then(res => {
+      return res.json()
     })
 }
 
@@ -176,8 +176,8 @@ export const upVoteComment = (comment) => {
   };
 
   return fetch(url, config)
-    .then((res) => {
-      return(res.json())
+    .then(res => {
+      return res.json()
     })
 }
 
@@ -196,8 +196,8 @@ export const downVoteComment = (comment) => {
   };
 
   return fetch(url, config)
-    .then((res) => {
-      return(res.json())
+    .then(res => {
+      return res.json()
     })
 }
 
