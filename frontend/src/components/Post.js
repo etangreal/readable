@@ -1,5 +1,6 @@
 import React from 'react';
 import uuid from 'uuid/v4';
+import { Link } from 'react-router-dom';
 import VoteScore from './VoteScore';
 import Comments from './Comments';
 
@@ -23,7 +24,7 @@ const Post = ({post, comments, actions}) => (
       <i className="far fa-trash"></i>
     </button>
     <br />
-    id: {post.id}<br />
+    id: {post.id} | <Link to={`/${post.category}/${post.id}`}>Details</Link><br />
     author: {post.author}<br />
     title: {post.title}<br />
     category: {post.category}<br />
