@@ -10,6 +10,7 @@ export const FETCH_POSTS = 'FETCH_POSTS';
 export const UPVOTE_POST = 'UPVOTE_POST';
 export const DOWNVOTE_POST = 'DOWNVOTE_POST';
 export const CREATE_POST = 'CREATE_POST';
+export const UPDATE_POST = 'UPDATE_POST';
 export const DELETE_POST = 'DELETE_POST';
 
 export const FETCH_COMMENTS = 'FETCH_COMMENTS';
@@ -66,6 +67,15 @@ export const createPost = (post) => dispatch => (
     .then(posts => dispatch({
       type: CREATE_POST,
       payload: posts
+    }))
+);
+
+export const updatePost = (post) => dispatch => (
+  readableAPI
+    .updatePost(post)
+    .then(post => dispatch({
+      type: UPDATE_POST,
+      payload: post
     }))
 );
 

@@ -104,6 +104,27 @@ export const createPost = (post) => {
     })
 }
 
+export const updatePost = (post) => {
+  const url = `${process.env.REACT_APP_BACKEND}/posts/${post.id}`;
+  const config = {
+    method: 'PUT',
+    headers: {
+      'Authorization': 'whatever-you-want',
+      'Content-Type': 'application/json'
+    },
+    // credentials: 'include'
+    body: JSON.stringify({
+      title: post.title,
+      body: post.body
+    })
+  };
+
+  return fetch(url, config)
+    .then((res) => {
+      return(res.json())
+    })
+}
+
 export const deletePost = (postId) => {
   const url = `${process.env.REACT_APP_BACKEND}/posts/${postId}`;
   const config = {

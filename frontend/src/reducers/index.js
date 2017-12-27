@@ -6,6 +6,7 @@ import {
   UPVOTE_POST,
   DOWNVOTE_POST,
   CREATE_POST,
+  UPDATE_POST,
   DELETE_POST,
 
   FETCH_COMMENTS,
@@ -46,6 +47,12 @@ const posts = (state = [], action) => {
 
     case CREATE_POST:
       return [...state, payload];
+
+    case UPDATE_POST:
+      return [
+        ...state.filter(post => post.id !== payload.id),
+        payload
+      ];
 
     case DELETE_POST:
       if (payload)

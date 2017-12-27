@@ -9,6 +9,7 @@ import {
   upVotePost,
   downVotePost,
   createPost,
+  updatePost,
   deletePost,
 
   fetchComments,
@@ -22,13 +23,13 @@ import { CommentEditModal } from './components/Comment.Edit';
 import Posts from './components/Posts';
 import './App.css';
 
-const updatePost = (field, value) => (state) => ({
+const updatePostState = (field, value) => (state) => ({
   post: {
     ...state.post,
     [field]: value
   }
 });
-const updateComment = (field, value) => (state) => ({
+const updateCommentState = (field, value) => (state) => ({
   comment: {
     ...state.comment,
     [field]: value
@@ -85,7 +86,7 @@ class App extends Component {
     console.log('Edit Post');
   }
 
-  updatePost = (field, value) => this.setState(updatePost(field, value))
+  updatePost = (field, value) => this.setState(updatePostState(field, value))
 
   savePost = () => {
     this.state.isPostAdd && this.props.createPost(this.state.post);
@@ -128,7 +129,7 @@ class App extends Component {
     console.log('Edit Comment');
   }
 
-  updateComment = (field, value) => this.setState(updateComment(field, value))
+  updateComment = (field, value) => this.setState(updateCommentState(field, value))
 
   saveComment = () => {
     this.state.isCommentAdd && this.props.createComment(this.state.comment);
@@ -248,7 +249,7 @@ function mapDispatchToProps(dispatch) {
     upVotePost: (post) => () => dispatch(upVotePost(post)),
     downVotePost: (post) => () => dispatch(downVotePost(post)),
     createPost: (post) => dispatch(createPost(post)),
-    updatePost: (post) => console.log('Update Post', JSON.stringify(post)),
+    updatePost: (post) => dispatch(updatePost(post)),
     deletePost: (postId) => () => dispatch(deletePost(postId)),
 
     fetchComments: (comments) => dispatch(fetchComments(comments)),
