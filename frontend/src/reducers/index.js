@@ -101,8 +101,7 @@ const comments = (state = [], action) => {
     case DELETE_COMMENT:
       if (payload)
         return [
-          ...state.filter(comment => comment.id !== payload),
-          Object.assign({}, state.find(comment => comment.id === payload), {deleted: true})
+          ...state.filter(comment => comment.id !== payload)
         ];
       return state;
 
