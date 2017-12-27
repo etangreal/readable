@@ -1,16 +1,17 @@
 import React from 'react';
+import uuid from 'uuid/v4';
 import VoteScore from './VoteScore';
 import Comments from './Comments';
 
 export const post = () => ({
-  id: '',
+  id: uuid(),
   author: '',
   title: '',
   category: '',
   body: '',
   timestamp: Date.now(),
   voteScore: 0
-})
+});
 
 const Post = ({post, comments, actions}) => (
   <div>
@@ -32,7 +33,7 @@ const Post = ({post, comments, actions}) => (
       upVote={actions.upVotePost(post)}
       downVote={actions.downVotePost(post)}
     /><br />
-    {comments && Comments({comments, actions})}
+    {comments && Comments({comments, postId: post.id, actions})}
   </div>
 );
 

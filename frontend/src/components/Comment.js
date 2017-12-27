@@ -1,15 +1,16 @@
 import React from 'react';
+import uuid from 'uuid/v4';
 import VoteScore from './VoteScore';
 
 export const comment = () => ({
-  id: '',
+  id: uuid(),
   parentId: '',
   author: '',
   body: '',
   timestamp: Date.now(),
   voteScore: 0,
   deleted: false
-})
+});
 
 const Comment = ({comment, actions}) => (
   <div>

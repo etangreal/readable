@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Route } from 'react-router-dom';
+import Modal from 'react-modal';
 import {
   fetchCategories,
   fetchPosts,
@@ -11,9 +12,25 @@ import {
   upVoteComment,
   downVoteComment
 } from './actions';
-import Post from './components/Post';
+import Post, { post } from './components/Post';
+import { PostEditModal } from './components/Post.Edit';
+import { comment } from './components/Comment';
+import { CommentEditModal } from './components/Comment.Edit';
 import Posts from './components/Posts';
 import './App.css';
+
+const updatePost = (field, value) => (state) => ({
+  post: {
+    ...state.post,
+    [field]: value
+  }
+});
+const updateComment = (field, value) => (state) => ({
+  comment: {
+    ...state.comment,
+    [field]: value
+  }
+});
 
 // ------------------------------------------------------------------------------------------------
 // APP
@@ -23,9 +40,18 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      isPostAdd: false,
+      isPostEdit: false,
       post: undefined,
+
+      isCommentAdd: false,
+      isCommentEdit: false,
       comment: undefined
     }
+  }
+
+  componentWillMount() {
+    Modal.setAppElement('body');
   }
 
   componentDidMount() {
@@ -36,49 +62,109 @@ class App extends Component {
     }
   }
 
+  // ----------------------------------------------------------------------------------------------
+
   addPost = () => {
+    this.setState({
+      isPostAdd: true,
+      isPostEdit: false,
+      post: post()
+    });
     console.log('Add Post');
   }
 
   editPost = (post) => () => {
+    this.setState({
+      isPostAdd: false,
+      isPostEdit: true,
+      post: Object.assign({}, post)
+    });
     console.log('Edit Post');
   }
 
+  updatePost = (field, value) => this.setState(updatePost(field, value))
+
+  savePost = () => {
+    this.state.isPostAdd && this.props.createPost(this.state.post);
+    this.state.isPostEdit && this.props.updatePost(this.state.post);
+
+    this.setState({
+      isPostAdd: false,
+      isPostEdit: false,
+      post: undefined
+    });
+    console.log('Save Post');
+  }
+
   cancelPost = () => {
+    this.setState({
+      isPostAdd: false,
+      isPostEdit: false,
+      post: undefined
+    });
     console.log('Cancel Post');
   }
 
-  addComment = () => {
+  // ----------------------------------------------------------------------------------------------
+
+  addComment = (postId) => () => {
+    this.setState({
+      isCommentAdd: true,
+      isCommentEdit: false,
+      comment: Object.assign(comment(), {parentId: postId})
+    });
     console.log('Add Comment');
   }
 
   editComment = (comment) => () => {
+    this.setState({
+      isCommentAdd: false,
+      isCommentEdit: true,
+      comment: Object.assign({}, comment)
+    });
     console.log('Edit Comment');
   }
 
+  updateComment = (field, value) => this.setState(updateComment(field, value))
+
+  saveComment = () => {
+    this.state.isCommentAdd && this.props.createComment(this.state.comment);
+    this.state.isCommentEdit && this.props.updateComment(this.state.comment);
+
+    this.setState({
+      isCommentAdd: false,
+      isCommentEdit: false,
+      comment: undefined
+    });
+    console.log('Save Comment');
+  }
+
   cancelComment = () => {
+    this.setState({
+      isCommentAdd: false,
+      isCommentEdit: false,
+      comment: undefined
+    });
     console.log('Cancel Comment');
   }
+
+  // ----------------------------------------------------------------------------------------------
 
   actions = () => ({
       upVotePost: this.props.upVotePost,
       downVotePost: this.props.downVotePost,
       addPost: this.addPost,
       editPost: this.editPost,
-      cancelPost: this.cancelPost,
-      createPost: this.props.addPost,
-      updatePost: this.props.editPost,
       deletePost: this.props.deletePost,
 
       upVoteComment: this.props.upVoteComment,
       downVoteComment: this.props.downVoteComment,
       addComment: this.addComment,
       editComment: this.editComment,
-      cancelComment: this.cancelComment,
-      createComment: this.props.addComment,
-      updateComment: this.props.editComment,
       deleteComment: this.props.deleteComment,
   })
+
+  // ----------------------------------------------------------------------------------------------
 
   renderPosts = () => {
     return Posts({
@@ -119,6 +205,21 @@ class App extends Component {
         <Route exact path='/' render={this.renderPosts} />
         <Route exact path='/:category' render={this.renderPostsByCategory} />
         <Route exact path='/:category/:postId' render={this.renderPostDetails} />
+
+        <PostEditModal
+          isOpen={this.state.isPostAdd || this.state.isPostEdit}
+          post={this.state.post}
+          update={this.updatePost}
+          onSave={this.savePost}
+          onCancel={this.cancelPost}
+        />
+        <CommentEditModal
+          isOpen={this.state.isCommentAdd || this.state.isCommentEdit}
+          comment={this.state.comment}
+          update={this.updateComment}
+          onSave={this.saveComment}
+          onCancel={this.cancelComment}
+        />
       </div>
     );
   }
@@ -143,16 +244,16 @@ function mapDispatchToProps(dispatch) {
     fetchPosts: (posts) => dispatch(fetchPosts(posts)),
     upVotePost: (post) => () => dispatch(upVotePost(post)),
     downVotePost: (post) => () => dispatch(downVotePost(post)),
-    createPost: (post) => () => console.log('Create Post'),
-    updatePost: (post) => () => console.log('Update Post'),
-    deletePost: (post) => () => console.log('Delete Post'),
+    createPost: (post) => console.log('Create Post', JSON.stringify(post)),
+    updatePost: (post) => console.log('Update Post', JSON.stringify(post)),
+    deletePost: (post) => () => console.log('Delete Post', JSON.stringify(post)),
 
     fetchComments: (comments) => dispatch(fetchComments(comments)),
     upVoteComment: (comment) => () => dispatch(upVoteComment(comment)),
     downVoteComment: (comment) => () => dispatch(downVoteComment(comment)),
-    createComment: (comment) => () => console.log('Create Comment'),
-    updateComment: (comment) => () => console.log('Update Comment'),
-    deleteComment: (comment) => () => console.log('Delete Comment'),
+    createComment: (comment) => console.log('Create Comment', JSON.stringify(comment)),
+    updateComment: (comment) => console.log('Update Comment', JSON.stringify(comment)),
+    deleteComment: (comment) => () => console.log('Delete Comment', JSON.stringify(comment)),
   };
 }
 
