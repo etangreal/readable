@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Route } from 'react-router-dom';
+import { Switch, Route, withRouter } from 'react-router-dom';
 import Modal from 'react-modal';
 import {
   fetchCategories,
@@ -19,6 +19,7 @@ import {
   updateComment,
   deleteComment
 } from './actions';
+import Navigation from './components/Navigation';
 import Post, { post } from './components/Post';
 import { PostEditModal } from './components/Post.Edit';
 import { comment } from './components/Comment';
@@ -208,10 +209,13 @@ class App extends Component {
   render() {
     return (
       <div>
-        <br />
-        <Route exact path='/' render={this.renderPosts} />
-        <Route exact path='/:category' render={this.renderPostsByCategory} />
-        <Route exact path='/:category/:postId' render={this.renderPostDetails} />
+        <Navigation
+          categories={this.props.categories} />
+        <Switch>
+          <Route exact path='/' render={this.renderPosts} />
+          <Route path='/:category' render={this.renderPostsByCategory} />
+          <Route path='/:category/:postId' render={this.renderPostDetails} />
+        </Switch>
 
         <PostEditModal
           isOpen={this.state.isPostAdd || this.state.isPostEdit}
@@ -264,7 +268,7 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));
 
 // ------------------------------------------------------------------------------------------------
 // END
