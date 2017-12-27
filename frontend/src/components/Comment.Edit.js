@@ -68,6 +68,10 @@ const CommentEdit = ({
       <td>{comment.deleted.toString()}</td>
     </tr>
     <tr>
+      <td>parentDeleted:</td>
+      <td>{comment.parentDeleted.toString()}</td>
+    </tr>
+    <tr>
       <td></td>
       <td>
         <button onClick={handleSave}>

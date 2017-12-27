@@ -16,6 +16,7 @@ export const DELETE_POST = 'DELETE_POST';
 export const FETCH_COMMENTS = 'FETCH_COMMENTS';
 export const UPVOTE_COMMENT = 'UPVOTE_COMMENT';
 export const DOWNVOTE_COMMENT = 'DOWNVOTE_COMMENT';
+export const CREATE_COMMENT = 'CREATE_COMMENT';
 
 // ------------------------------------------------------------------------------------------------
 // CATEGORIES
@@ -115,6 +116,15 @@ export const downVoteComment = commentId => dispatch => (
     .downVoteComment(commentId)
     .then(comment => dispatch({
       type: DOWNVOTE_COMMENT,
+      payload: comment
+    }))
+);
+
+export const createComment = (comment) => dispatch => (
+  readableAPI
+    .createComment(comment)
+    .then(comment => dispatch({
+      type: CREATE_COMMENT,
       payload: comment
     }))
 );

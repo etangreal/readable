@@ -14,7 +14,8 @@ import {
 
   fetchComments,
   upVoteComment,
-  downVoteComment
+  downVoteComment,
+  createComment
 } from './actions';
 import Post, { post } from './components/Post';
 import { PostEditModal } from './components/Post.Edit';
@@ -255,7 +256,7 @@ function mapDispatchToProps(dispatch) {
     fetchComments: (comments) => dispatch(fetchComments(comments)),
     upVoteComment: (comment) => () => dispatch(upVoteComment(comment)),
     downVoteComment: (comment) => () => dispatch(downVoteComment(comment)),
-    createComment: (comment) => console.log('Create Comment', JSON.stringify(comment)),
+    createComment: (comment) => dispatch(createComment(comment)),
     updateComment: (comment) => console.log('Update Comment', JSON.stringify(comment)),
     deleteComment: (comment) => () => console.log('Delete Comment', JSON.stringify(comment)),
   };

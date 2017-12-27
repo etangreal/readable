@@ -9,7 +9,8 @@ export const comment = () => ({
   body: '',
   timestamp: Date.now(),
   voteScore: 0,
-  deleted: false
+  deleted: false,
+  parentDeleted: false
 });
 
 const Comment = ({comment, actions}) => (
@@ -32,6 +33,7 @@ const Comment = ({comment, actions}) => (
       downVote={actions.downVoteComment(comment)}
     /><br />
     deleted: {comment.deleted.toString()}<br />
+    parentDeleted: {comment.parentDeleted.toString()}<br />
   </div>
 );
 

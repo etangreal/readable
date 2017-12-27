@@ -201,6 +201,30 @@ export const downVoteComment = (comment) => {
     })
 }
 
+export const createComment = (comment) => {
+  const url = `${process.env.REACT_APP_BACKEND}/comments`;
+  const config = {
+    method: 'POST',
+    headers: {
+      'Authorization': 'whatever-you-want',
+      'Content-Type': 'application/json'
+    },
+    // credentials: 'include'
+    body: JSON.stringify({
+      id: comment.id,
+      parentId: comment.parentId,
+      author: comment.author,
+      body: comment.body,
+      timestamp: comment.timestamp
+    })
+  };
+
+  return fetch(url, config)
+    .then(res => {
+      return res.json()
+    })
+}
+
 // ------------------------------------------------------------------------------------------------
 // END
 // ------------------------------------------------------------------------------------------------

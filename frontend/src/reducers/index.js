@@ -11,7 +11,8 @@ import {
 
   FETCH_COMMENTS,
   UPVOTE_COMMENT,
-  DOWNVOTE_COMMENT
+  DOWNVOTE_COMMENT,
+  CREATE_COMMENT
 } from '../actions';
 
 const categories = (state = [], action) => {
@@ -85,6 +86,9 @@ const comments = (state = [], action) => {
         ...state.filter(comment => comment.id !== payload.id),
         payload
       ];
+
+    case CREATE_COMMENT:
+      return [...state, payload];
 
     default:
       return state;
