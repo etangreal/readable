@@ -12,7 +12,9 @@ import {
   FETCH_COMMENTS,
   UPVOTE_COMMENT,
   DOWNVOTE_COMMENT,
-  CREATE_COMMENT
+  CREATE_COMMENT,
+  UPDATE_COMMENT,
+  DELETE_COMMENT
 } from '../actions';
 
 const categories = (state = [], action) => {
@@ -89,6 +91,20 @@ const comments = (state = [], action) => {
 
     case CREATE_COMMENT:
       return [...state, payload];
+
+    case UPDATE_COMMENT:
+      return [
+        ...state.filter(comment => comment.id !== payload.id),
+        payload
+      ];
+
+    case DELETE_COMMENT:
+      if (payload)
+        return [
+          ...state.filter(comment => comment.id !== payload),
+          Object.assign({}, state.find(comment => comment.id === payload), {deleted: true})
+        ];
+      return state;
 
     default:
       return state;

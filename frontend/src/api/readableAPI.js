@@ -137,7 +137,7 @@ export const deletePost = (postId) => {
   };
 
   return fetch(url, config)
-    .then( res => {
+    .then(res => {
       return res.ok ? postId : undefined;
     })
 }
@@ -222,6 +222,43 @@ export const createComment = (comment) => {
   return fetch(url, config)
     .then(res => {
       return res.json()
+    })
+}
+
+export const updateComment = (comment) => {
+  const url = `${process.env.REACT_APP_BACKEND}/comments/${comment.id}`;
+  const config = {
+    method: 'PUT',
+    headers: {
+      'Authorization': 'whatever-you-want',
+      'Content-Type': 'application/json'
+    },
+    // credentials: 'include'
+    body: JSON.stringify({
+      body: comment.body
+    })
+  };
+
+  return fetch(url, config)
+    .then(res => {
+      return res.json()
+    })
+}
+
+export const deleteComment = (commentId) => {
+  const url = `${process.env.REACT_APP_BACKEND}/comments/${commentId}`;
+  const config = {
+    method: 'DELETE',
+    headers: {
+      'Authorization': 'whatever-you-want',
+      'Content-Type': 'application/json'
+    },
+    // credentials: 'include'
+  };
+
+  return fetch(url, config)
+    .then(res => {
+      return res.ok ? commentId : undefined;
     })
 }
 

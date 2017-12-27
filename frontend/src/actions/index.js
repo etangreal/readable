@@ -17,6 +17,8 @@ export const FETCH_COMMENTS = 'FETCH_COMMENTS';
 export const UPVOTE_COMMENT = 'UPVOTE_COMMENT';
 export const DOWNVOTE_COMMENT = 'DOWNVOTE_COMMENT';
 export const CREATE_COMMENT = 'CREATE_COMMENT';
+export const UPDATE_COMMENT = 'UPDATE_COMMENT';
+export const DELETE_COMMENT = 'DELETE_COMMENT';
 
 // ------------------------------------------------------------------------------------------------
 // CATEGORIES
@@ -83,9 +85,9 @@ export const updatePost = (post) => dispatch => (
 export const deletePost = (postId) => dispatch => (
   readableAPI
     .deletePost(postId)
-    .then(Id => dispatch({
+    .then(id => dispatch({
       type: DELETE_POST,
-      payload: Id
+      payload: id
     }))
 );
 
@@ -126,6 +128,24 @@ export const createComment = (comment) => dispatch => (
     .then(comment => dispatch({
       type: CREATE_COMMENT,
       payload: comment
+    }))
+);
+
+export const updateComment = (comment) => dispatch => (
+  readableAPI
+    .updateComment(comment)
+    .then(comment => dispatch({
+      type: UPDATE_COMMENT,
+      payload: comment
+    }))
+);
+
+export const deleteComment = (commentId) => dispatch => (
+  readableAPI
+    .deleteComment(commentId)
+    .then(id => dispatch({
+      type: DELETE_COMMENT,
+      payload: id
     }))
 );
 
