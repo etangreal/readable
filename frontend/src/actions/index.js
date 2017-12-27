@@ -64,9 +64,9 @@ export const downVotePost = postId => dispatch => (
 export const createPost = (post) => dispatch => (
   readableAPI
     .createPost(post)
-    .then(posts => dispatch({
+    .then(post => dispatch({
       type: CREATE_POST,
-      payload: posts
+      payload: post
     }))
 );
 
