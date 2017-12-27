@@ -208,8 +208,8 @@ class App extends Component {
         />
         <Switch>
           <Route exact path='/' render={this.renderPosts} />
-          <Route path='/:category' render={this.renderPostsByCategory} />
-          <Route path='/:category/:postId' render={this.renderPostDetails} />
+          <Route exact path='/:category' render={this.renderPostsByCategory} />
+          <Route exact path='/:category/:postId' render={this.renderPostDetails} />
         </Switch>
 
         <PostEditModal
