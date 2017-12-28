@@ -164,6 +164,13 @@ class App extends Component {
 
   // ----------------------------------------------------------------------------------------------
 
+  renderPosts = () => {
+    return Posts({
+      posts: this.props.posts,
+      actions: this.actions()
+    });
+  }
+
   renderPostsByCategory = (props) => (
     Posts({
       posts: this.props.posts.filter((post) => {
@@ -172,13 +179,6 @@ class App extends Component {
       actions: this.actions()
     })
   )
-
-  renderPosts = () => {
-    return Posts({
-      posts: this.props.posts,
-      actions: this.actions()
-    });
-  }
 
   renderPostDetails = (props) => {
     const { category, postId } = props.match.params;
