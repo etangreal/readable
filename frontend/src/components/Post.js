@@ -1,8 +1,8 @@
 import React from 'react';
 import uuid from 'uuid/v4';
-import { withRouter } from 'react-router-dom';
-import VoteScore from './VoteScore';
-import Comments from './Comments';
+import PostAdd from './Post.Add';
+import PostEdit from './Post.Edit';
+import PostView from './Post.View';
 
 export const post = () => ({
   id: uuid(),
@@ -15,38 +15,8 @@ export const post = () => ({
   deleted: false
 });
 
-const Post = ({post, comments, actions}) => {
-  const DetailsButton = withRouter(({ history }) => (
-    <button onClick={() => { history.push(`/${post.category}/${post.id}`) }}>
-        Details <i className="far fa-dot-circle" />
-    </button>
-  ));
-
-  return (
-    <div>
-      <DetailsButton />&nbsp;
-      <button onClick={actions.editPost(post)}>
-        Edit <i className="far fa-pen"></i>
-      </button>&nbsp;
-      <button onClick={actions.deletePost(post.id)}>
-        Delete <i className="far fa-trash"></i>
-      </button>&nbsp;
-      <br />
-      id: {post.id}<br />
-      author: {post.author}<br />
-      title: {post.title}<br />
-      category: {post.category}<br />
-      body: {post.body}<br />
-      timestamp: {post.timestamp}<br />
-      voteScore: {post.voteScore}&nbsp;
-      <VoteScore
-        upVote={actions.upVotePost(post)}
-        downVote={actions.downVotePost(post)}
-      /><br />
-      deleted: {post.deleted.toString()}
-      {comments && Comments({comments, postId: post.id, actions})}
-    </div>
-  );
+export default {
+  Add: PostAdd,
+  Edit: PostEdit,
+  View: PostView
 }
-
-export default Post;

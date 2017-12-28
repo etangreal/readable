@@ -21,10 +21,9 @@ import {
 } from './actions';
 import Navigation from './components/Navigation';
 import Post, { post } from './components/Post';
-import { PostEditModal } from './components/Post.Edit';
+import Posts from './components/Posts';
 import { comment } from './components/Comment';
 import { CommentEditModal } from './components/Comment.Edit';
-import Posts from './components/Posts';
 import './App.css';
 
 const updatePostState = (field, value) => (state) => ({
@@ -166,13 +165,6 @@ class App extends Component {
 
   // ----------------------------------------------------------------------------------------------
 
-  renderPosts = () => {
-    return Posts({
-      posts: this.props.posts,
-      actions: this.actions()
-    });
-  }
-
   renderPostsByCategory = (props) => (
     Posts({
       posts: this.props.posts.filter((post) => {
@@ -181,6 +173,13 @@ class App extends Component {
       actions: this.actions()
     })
   )
+
+  renderPosts = () => {
+    return Posts({
+      posts: this.props.posts,
+      actions: this.actions()
+    });
+  }
 
   renderPostDetails = (props) => {
     const { category, postId } = props.match.params;
@@ -191,7 +190,7 @@ class App extends Component {
     );
 
     return post ?
-      Post({
+      Post.View({
         post,
         comments: this.props.comments,
         actions: this.actions()
@@ -199,34 +198,55 @@ class App extends Component {
       : <div>none</div>;
   }
 
+  renderPostAddOrEditModal = () => {
+    if (this.state.isPostAdd || this.state.isPostEdit) {
+      const PostAddOrEdit = this.state.isPostAdd ? Post.Add : Post.Edit;
+
+      return <Modal
+        className='modal'
+        overlayClassName='overlay'
+        contentLabel='Modal'
+        isOpen={true}
+        onRequestClose={this.cancelPost}>
+
+        <PostAddOrEdit
+          post={this.state.post}
+          categories={this.props.categories}
+          updatePost={this.updatePost}
+          savePost={this.savePost}
+          cancelPost={this.cancelPost} />
+      </Modal>
+    }
+  }
+
+  renderCommentAddOrEditModal = () => {
+    if (this.state.isCommentAdd || this.state.isCommentEdit) {
+
+      return <CommentEditModal
+        isOpen={true}
+        comment={this.state.comment}
+        update={this.updateComment}
+        onSave={this.saveComment}
+        onCancel={this.cancelComment}
+      />
+    }
+  }
+
   render() {
     return (
       <div>
         <Navigation
           categories={this.props.categories}
-          addPost={this.addPost}
-        />
+          addPost={this.addPost} />
+
         <Switch>
           <Route exact path='/' render={this.renderPosts} />
           <Route exact path='/:category' render={this.renderPostsByCategory} />
           <Route exact path='/:category/:postId' render={this.renderPostDetails} />
         </Switch>
 
-        <PostEditModal
-          isOpen={this.state.isPostAdd || this.state.isPostEdit}
-          post={this.state.post}
-          categories={this.props.categories}
-          update={this.updatePost}
-          onSave={this.savePost}
-          onCancel={this.cancelPost}
-        />
-        <CommentEditModal
-          isOpen={this.state.isCommentAdd || this.state.isCommentEdit}
-          comment={this.state.comment}
-          update={this.updateComment}
-          onSave={this.saveComment}
-          onCancel={this.cancelComment}
-        />
+        {this.renderPostAddOrEditModal()}
+        {this.renderCommentAddOrEditModal()}
       </div>
     );
   }

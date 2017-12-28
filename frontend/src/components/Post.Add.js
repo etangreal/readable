@@ -1,6 +1,8 @@
 import React from 'react';
+import Modal from 'react-modal';
+import Select from './Select';
 
-const PostEdit = ({
+const PostAdd = ({
   post,
   categories,
   updatePost,
@@ -22,11 +24,19 @@ const PostEdit = ({
       </tr>
       <tr>
         <td>author:</td>
-        <td>{post.author}</td>
+        <td><input
+            type="text"
+            value={post.author}
+            onChange={handleUpdatePost('author')}
+        /></td>
       </tr>
       <tr>
         <td>category:</td>
-        <td>{post.category}</td>
+        <td><Select
+          items={categoryOptions}
+          defaultValue={post.category}
+          onChange={value => updatePost('category', value)}
+        /></td>
       </tr>
       <tr>
         <td>title:</td>
@@ -66,6 +76,6 @@ const PostEdit = ({
       </tr>
     </tbody></table>
   );
-};
+}
 
-export default PostEdit;
+export default PostAdd;

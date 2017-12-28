@@ -6,7 +6,7 @@ const Posts = ({posts, actions}) => {
     .sort((p1, p2) => p1.timestamp >= p2.timestamp)
     .map(post =>
     <li key={post.id}>
-      {Post({post, actions})}
+      {Post.View({post, actions})}
     </li>
   );
 
