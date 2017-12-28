@@ -15,29 +15,33 @@ export const post = () => ({
   deleted: false
 });
 
-const Post = ({post, comments, actions}) => (
-  <div>
-    <button onClick={actions.editPost(post)}>
-      <i className="far fa-pen"></i>
-    </button>
-    <button onClick={actions.deletePost(post.id)}>
-      <i className="far fa-trash"></i>
-    </button>
-    <br />
-    id: {post.id} | <Link to={`/${post.category}/${post.id}`}>Details</Link><br />
-    author: {post.author}<br />
-    title: {post.title}<br />
-    category: {post.category}<br />
-    body: {post.body}<br />
-    timestamp: {post.timestamp}<br />
-    voteScore: {post.voteScore}
-    <VoteScore
-      upVote={actions.upVotePost(post)}
-      downVote={actions.downVotePost(post)}
-    /><br />
-    deleted: {post.deleted.toString()}
-    {comments && Comments({comments, postId: post.id, actions})}
-  </div>
-);
+const Post = ({post, comments, actions}) => {
+  const details = <Link to={`/${post.category}/${post.id}`}>Details</Link>;
+
+  return (
+    <div>
+      <button onClick={actions.editPost(post)}>
+        <i className="far fa-pen"></i>
+      </button>
+      <button onClick={actions.deletePost(post.id)}>
+        <i className="far fa-trash"></i>
+      </button> | {details}
+      <br />
+      id: {post.id}<br />
+      author: {post.author}<br />
+      title: {post.title}<br />
+      category: {post.category}<br />
+      body: {post.body}<br />
+      timestamp: {post.timestamp}<br />
+      voteScore: {post.voteScore}
+      <VoteScore
+        upVote={actions.upVotePost(post)}
+        downVote={actions.downVotePost(post)}
+      /><br />
+      deleted: {post.deleted.toString()}
+      {comments && Comments({comments, postId: post.id, actions})}
+    </div>
+  );
+}
 
 export default Post;
