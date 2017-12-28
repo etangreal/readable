@@ -1,29 +1,6 @@
 import React from 'react';
 import Modal from 'react-modal';
 
-export const CommentEditModal = ({
-  isOpen,
-  comment,
-  update,
-  onSave,
-  onCancel: handleCancel
-}) => {
-  return <Modal
-    className='modal'
-    overlayClassName='overlay'
-    contentLabel='Modal'
-    isOpen={isOpen}
-    onRequestClose={handleCancel}>
-
-    <CommentEdit {...{
-      comment,
-      update,
-      onSave,
-      onCancel: handleCancel
-    }} />
-  </Modal>
-}
-
 const CommentEdit = ({
   comment,
   update,

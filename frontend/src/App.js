@@ -22,8 +22,7 @@ import {
 import Navigation from './components/Navigation';
 import Post, { post } from './components/Post';
 import Posts from './components/Posts';
-import { comment } from './components/Comment';
-import { CommentEditModal } from './components/Comment.Edit';
+import Comment, { comment } from './components/Comment';
 import './App.css';
 
 const updatePostState = (field, value) => (state) => ({
@@ -222,13 +221,19 @@ class App extends Component {
   renderCommentAddOrEditModal = () => {
     if (this.state.isCommentAdd || this.state.isCommentEdit) {
 
-      return <CommentEditModal
+      return <Modal
+        className='modal'
+        overlayClassName='overlay'
+        contentLabel='Modal'
         isOpen={true}
-        comment={this.state.comment}
-        update={this.updateComment}
-        onSave={this.saveComment}
-        onCancel={this.cancelComment}
-      />
+        onRequestClose={this.cancelComment}>
+
+        <Comment.Edit
+          comment={this.state.comment}
+          update={this.updateComment}
+          onSave={this.saveComment}
+          onCancel={this.cancelComment} />
+      </Modal>
     }
   }
 

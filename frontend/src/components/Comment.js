@@ -1,5 +1,6 @@
 import React from 'react';
 import uuid from 'uuid/v4';
+import CommentEdit from './Comment.Edit';
 import CommentView from './Comment.View';
 
 export const comment = () => ({
@@ -14,5 +15,7 @@ export const comment = () => ({
 });
 
 export default {
+  Add: () => <div> Add Comment </div>,
+  Edit: CommentEdit,
   View: CommentView
 };
