@@ -6,7 +6,7 @@ const Comments = ({comments, postId, actions}) => {
     .sort((c1, c2) => c1.timestamp >= c2.timestamp)
     .map(comment => (
     <li key={comment.id}>
-      {Comment({comment, actions})}
+      {Comment.View({comment, actions})}
     </li>
   )) : undefined;
 
