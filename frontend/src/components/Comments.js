@@ -15,7 +15,7 @@ const Comments = ({comments, postId, actions}) => {
       {list && list.length ? list : ''}
       <li>
         <button onClick={actions.addComment(postId)}>
-          <i className="far fa-plus"></i>
+          Add Comment <i className="far fa-plus"></i>
         </button>
       </li>
     </ul>

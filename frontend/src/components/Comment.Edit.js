@@ -75,10 +75,10 @@ const CommentEdit = ({
       <td></td>
       <td>
         <button onClick={handleSave}>
-          <i className="far fa-save"></i>
-        </button>
+          Save <i className="far fa-save"></i>
+        </button>&nbsp;
         <button onClick={handleCancel}>
-          <i className="far fa-ban"></i>
+          Cancel <i className="far fa-ban"></i>
         </button>
       </td>
     </tr>

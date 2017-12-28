@@ -16,10 +16,10 @@ export const comment = () => ({
 const Comment = ({comment, actions}) => (
   <div>
     <button onClick={actions.editComment(comment)}>
-      <i className="far fa-pen"></i>
+      Edit <i className="far fa-pen"></i>
     </button>
     <button onClick={actions.deleteComment(comment.id)}>
-      <i className="far fa-trash"></i>
+      Delete <i className="far fa-trash"></i>
     </button>
     <br />
     id: {comment.id}<br />

@@ -1,6 +1,6 @@
 import React from 'react';
 import uuid from 'uuid/v4';
-import { Link } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import VoteScore from './VoteScore';
 import Comments from './Comments';
 
@@ -16,16 +16,21 @@ export const post = () => ({
 });
 
 const Post = ({post, comments, actions}) => {
-  const details = <Link to={`/${post.category}/${post.id}`}>Details</Link>;
+  const DetailsButton = withRouter(({ history }) => (
+    <button onClick={() => { history.push(`/${post.category}/${post.id}`) }}>
+        Details <i className="far fa-dot-circle" />
+    </button>
+  ));
 
   return (
     <div>
+      <DetailsButton />&nbsp;
       <button onClick={actions.editPost(post)}>
-        <i className="far fa-pen"></i>
-      </button>
+        Edit <i className="far fa-pen"></i>
+      </button>&nbsp;
       <button onClick={actions.deletePost(post.id)}>
-        <i className="far fa-trash"></i>
-      </button> | {details}
+        Delete <i className="far fa-trash"></i>
+      </button>&nbsp;
       <br />
       id: {post.id}<br />
       author: {post.author}<br />
@@ -33,7 +38,7 @@ const Post = ({post, comments, actions}) => {
       category: {post.category}<br />
       body: {post.body}<br />
       timestamp: {post.timestamp}<br />
-      voteScore: {post.voteScore}
+      voteScore: {post.voteScore}&nbsp;
       <VoteScore
         upVote={actions.upVotePost(post)}
         downVote={actions.downVotePost(post)}
