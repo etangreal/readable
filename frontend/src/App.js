@@ -215,6 +215,7 @@ class App extends Component {
         <PostEditModal
           isOpen={this.state.isPostAdd || this.state.isPostEdit}
           post={this.state.post}
+          categories={this.props.categories}
           update={this.updatePost}
           onSave={this.savePost}
           onCancel={this.cancelPost}
