@@ -220,6 +220,7 @@ class App extends Component {
 
   renderCommentAddOrEditModal = () => {
     if (this.state.isCommentAdd || this.state.isCommentEdit) {
+      const CommentAddOrEdit = this.state.isCommentAdd ? Comment.Add : Comment.Edit;
 
       return <Modal
         className='modal'
@@ -228,11 +229,11 @@ class App extends Component {
         isOpen={true}
         onRequestClose={this.cancelComment}>
 
-        <Comment.Edit
+        <CommentAddOrEdit
           comment={this.state.comment}
-          update={this.updateComment}
-          onSave={this.saveComment}
-          onCancel={this.cancelComment} />
+          updateComment={this.updateComment}
+          saveComment={this.saveComment}
+          cancelComment={this.cancelComment} />
       </Modal>
     }
   }

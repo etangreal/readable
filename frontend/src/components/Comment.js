@@ -1,5 +1,5 @@
-import React from 'react';
 import uuid from 'uuid/v4';
+import CommentAdd from './Comment.Add';
 import CommentEdit from './Comment.Edit';
 import CommentView from './Comment.View';
 
@@ -15,7 +15,7 @@ export const comment = () => ({
 });
 
 export default {
-  Add: () => <div> Add Comment </div>,
+  Add: CommentAdd,
   Edit: CommentEdit,
   View: CommentView
 };

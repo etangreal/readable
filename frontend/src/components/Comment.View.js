@@ -1,5 +1,4 @@
 import React from 'react';
-import uuid from 'uuid/v4';
 import VoteScore from './VoteScore';
 
 const Comment = ({comment, actions}) => (

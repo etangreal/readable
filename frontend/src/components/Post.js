@@ -1,4 +1,3 @@
-import React from 'react';
 import uuid from 'uuid/v4';
 import PostAdd from './Post.Add';
 import PostEdit from './Post.Edit';

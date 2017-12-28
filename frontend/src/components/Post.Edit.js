@@ -8,11 +8,6 @@ const PostEdit = ({
   cancelPost
 }) => {
   const handleUpdatePost = (field) => (e) => updatePost(field, e.target.value);
-  const categoryOptions = categories.map(category => ({
-    id: category.path,
-    name: category.name,
-    value: category.path
-  }));
 
   return (
     <table><tbody>

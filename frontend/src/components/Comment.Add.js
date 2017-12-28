@@ -20,7 +20,11 @@ const CommentEdit = ({
       </tr>
       <tr>
         <td>author:</td>
-        <td>{comment.author}</td>
+        <td><input
+            type="text"
+            value={comment.author}
+            onChange={handleUpdateComment('author')}
+        /></td>
       </tr>
       <tr>
         <td>body:</td>
@@ -58,7 +62,7 @@ const CommentEdit = ({
         </td>
       </tr>
     </tbody></table>
-  );
+  )
 };
 
 export default CommentEdit;
