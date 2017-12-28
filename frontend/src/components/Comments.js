@@ -11,8 +11,9 @@ const Comments = ({comments, postId, actions}) => {
   )) : undefined;
 
   return (
-    <ul>
-      <li>
+    <ul className="Comment-list">
+      <li className="Comment-item">
+        <br />
         <button onClick={actions.addComment(postId)}>
           Add Comment <i className="far fa-plus"></i>
         </button>

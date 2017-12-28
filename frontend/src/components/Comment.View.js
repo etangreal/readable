@@ -2,14 +2,16 @@ import React from 'react';
 import VoteScore from './VoteScore';
 
 const Comment = ({comment, actions}) => (
-  <div>
-    <button onClick={actions.editComment(comment)}>
-      Edit <i className="far fa-pen"></i>
-    </button>
-    <button onClick={actions.deleteComment(comment.id)}>
-      Delete <i className="far fa-trash"></i>
-    </button>
-    <br />
+  <div className="Comment-item">
+    <span className="Comment-buttons">
+      <button onClick={actions.editComment(comment)}>
+        Edit <i className="far fa-pen"></i>
+      </button>
+      <button onClick={actions.deleteComment(comment.id)}>
+        Delete <i className="far fa-trash"></i>
+      </button>
+    </span>
+
     id: {comment.id}<br />
     parentId: {comment.parentId}<br />
     author: {comment.author}<br />

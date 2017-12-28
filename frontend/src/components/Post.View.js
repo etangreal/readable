@@ -22,27 +22,29 @@ const Post = ({
 }) => {
   const DetailsButton = withRouter(({ history }) => (
     <button onClick={() => { history.push(`/${post.category}/${post.id}`) }}>
-        Details <i className="far fa-dot-circle" />
+      Details <i className="far fa-dot-circle" />
     </button>
   ));
 
   return (
-    <div>
-      <DetailsButton />&nbsp;
-      <button onClick={actions.editPost(post)}>
-        Edit <i className="far fa-pen"></i>
-      </button>&nbsp;
-      <button onClick={actions.deletePost(post.id)}>
-        Delete <i className="far fa-trash"></i>
-      </button>&nbsp;
-      <br />
+    <div className="Post-item">
+      <span className="Post-buttons">
+        {!comments && <span><DetailsButton />&nbsp;</span>}
+        <button onClick={actions.editPost(post)}>
+          Edit <i className="far fa-pen"></i>
+        </button>&nbsp;
+        <button onClick={actions.deletePost(post.id)}>
+          Delete <i className="far fa-trash"></i>
+        </button>
+      </span>
+
       id: {post.id}<br />
       author: {post.author}<br />
       title: {post.title}<br />
       category: {post.category}<br />
       body: {post.body}<br />
       timestamp: {post.timestamp}<br />
-      voteScore: {post.voteScore}&nbsp;
+      voteScore: {post.voteScore}
       <VoteScore
         upVote={actions.upVotePost(post)}
         downVote={actions.downVotePost(post)}

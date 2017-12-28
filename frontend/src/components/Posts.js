@@ -11,7 +11,7 @@ const Posts = ({posts, actions}) => {
   );
 
   return (
-    <ul>
+    <ul className="Post-list">
       {list}
     </ul>
   );
