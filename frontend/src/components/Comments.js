@@ -12,12 +12,12 @@ const Comments = ({comments, postId, actions}) => {
 
   return (
     <ul>
-      {list && list.length ? list : ''}
       <li>
         <button onClick={actions.addComment(postId)}>
           Add Comment <i className="far fa-plus"></i>
         </button>
       </li>
+      {list && list.length ? list : ''}
     </ul>
   )
 }
