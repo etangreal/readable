@@ -30,6 +30,10 @@ body {
   min-width: 500px;
 }
 
+.VoteScore {
+  display: inline-block;
+}
+
 .PostEdit-title {
   width: 100%;
 }
