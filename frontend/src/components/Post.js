@@ -3,11 +3,11 @@ import PostAdd from './Post.Add';
 import PostEdit from './Post.Edit';
 import PostView from './Post.View';
 
-export const post = () => ({
+export const post = (category) => ({
   id: uuid(),
   author: '',
   title: '',
-  category: '',
+  category: category || 'unknown',
   body: '',
   timestamp: Date.now(),
   voteScore: 0,

@@ -75,10 +75,13 @@ class App extends Component {
   // ----------------------------------------------------------------------------------------------
 
   addPost = () => {
+    const category = this.props.categories[0];
+    const path = category ? category.path : 'unknown';
+
     this.setState({
       isPostAdd: true,
       isPostEdit: false,
-      post: post()
+      post: post(path)
     });
   }
 
