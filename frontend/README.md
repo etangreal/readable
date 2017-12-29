@@ -5,7 +5,7 @@ This is the 2nd project for the Udacity React Nano Degree
 Getting Started:
 
 First run the backend:
-### `cd backend`
+### `cd api-backend`
 ### `npm install`
 ### `npm start`
 Runs the server on [http://localhost:3001](http://localhost:3001) : You can view it in the browser.
