@@ -47,12 +47,12 @@ const Post = ({
         upVote={actions.upVotePost(post)}
         downVote={actions.downVotePost(post)}
       /><br />
+      <em>Comments:</em> &nbsp; {post.commentCount}<br />
 
       {/* <br />
       <b>id:</b> {post.id}<br />
       <b>timestamp:</b> {post.timestamp}<br />
-      <b>deleted:</b> {post.deleted.toString()}
-      <br /> */}
+      <b>deleted:</b> {post.deleted.toString()}<br /> */}
 
       {comments && Comments({comments, postId: post.id, actions})}
     </div>

@@ -38,7 +38,26 @@ export const fetchPosts = () => {
       return res.json()
     }).then(posts => {
       return posts.filter(post => post.deleted === false);
-    })
+    }).then(posts => {
+      const promises = posts
+        .map(post => fetchComments(post.id)
+          .then(comments => ({
+            id: post.id,
+            count: comments.length
+          }))
+        );
+
+      return Promise
+        .all(promises)
+        .then(counted => counted.reduce((acc, cur) => {
+            acc[cur.id] = cur.count;
+            return acc;
+          }, {})
+        )
+        .then(counted => posts
+          .map(post => Object.assign({}, post, {commentCount: counted[post.id] || 0}))
+        );
+    });
 }
 
 export const upVotePost = (post) => {
