@@ -12,11 +12,30 @@ const Comments = ({comments, postId, actions}) => {
 
   return (
     <ul className="Comment-list">
-      <li className="Comment-item">
-        <button onClick={actions.addComment(postId)}>
-          Add Comment <i className="far fa-plus"></i>
-        </button>
-      </li>
+      <ul className="Comment-nav">
+        <li className="Comment-navItem">
+            <b>Comment Options:</b>
+        </li>
+        <li className="Comment-navItem">
+          <button onClick={actions.addComment(postId)}>
+            Add Comment <i className="far fa-plus"></i>
+          </button>
+        </li>
+        <li className="Comment-navItem">
+            <b>Sort By:</b>
+        </li>
+        <li className="Comment-navItem">
+          <button onClick={()=> console.log('sort by date')}>
+            Date <i className="far fa-sort-amount-down" />
+          </button>
+        </li>
+        <li className="Comment-navItem">
+          <button onClick={()=> console.log('sort by votes')}>
+            Votes <i className="far fa-sort-amount-down" />
+          </button>
+        </li>
+      </ul>
+
       {list && list.length ? list : ''}
     </ul>
   )

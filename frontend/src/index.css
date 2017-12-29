@@ -56,6 +56,21 @@ body {
   padding-bottom: 5px;
 }
 
+.Comment-nav {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+.Comment-navItem {
+  display: block;
+  float: left;
+
+  padding: 5px;
+  text-align: center;
+}
+
 .Comment-list {
   list-style-type: none;
   margin: 0;
