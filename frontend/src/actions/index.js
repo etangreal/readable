@@ -140,12 +140,12 @@ export const updateComment = (comment) => dispatch => (
     }))
 );
 
-export const deleteComment = (commentId) => dispatch => (
+export const deleteComment = (comment) => dispatch => (
   readableAPI
-    .deleteComment(commentId)
-    .then(id => dispatch({
+    .deleteComment(comment.id)
+    .then(dispatch({
       type: DELETE_COMMENT,
-      payload: id
+      payload: comment
     }))
 );
 

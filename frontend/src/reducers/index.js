@@ -65,6 +65,30 @@ const posts = (state = [], action) => {
         ];
       return state;
 
+    case FETCH_COMMENTS:
+      if (!payload.length)
+        return state;
+
+      const p1 = state.find(post => post.id === payload[0].parentId);
+      return [
+        ...state.filter(post => post.id !== p1.id),
+        Object.assign({}, p1, {commentCount: payload.length})
+      ];
+
+    case CREATE_COMMENT:
+      const p2 = state.find(post => post.id === payload.parentId);
+      return [
+        ...state.filter(post => post.id !== p2.id),
+        Object.assign({}, p2, {commentCount: p2.commentCount += 1})
+      ];
+
+    case DELETE_COMMENT:
+      const p3 = state.find(post => post.id === payload.parentId);
+      return [
+        ...state.filter(post => post.id !== p3.id),
+        Object.assign({}, p3, {commentCount: p3.commentCount -= 1})
+      ];
+
     default:
       return state;
   }
@@ -101,7 +125,7 @@ const comments = (state = [], action) => {
     case DELETE_COMMENT:
       if (payload)
         return [
-          ...state.filter(comment => comment.id !== payload)
+          ...state.filter(comment => comment.id !== payload.id)
         ];
       return state;
 

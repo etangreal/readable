@@ -7,7 +7,7 @@ const Comment = ({comment, actions}) => (
       <button onClick={actions.editComment(comment)}>
         Edit <i className="far fa-pen"></i>
       </button>
-      <button onClick={actions.deleteComment(comment.id)}>
+      <button onClick={actions.deleteComment(comment)}>
         Delete <i className="far fa-trash"></i>
       </button>
     </span>

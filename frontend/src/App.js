@@ -300,7 +300,7 @@ function mapDispatchToProps(dispatch) {
     downVoteComment: (comment) => () => dispatch(downVoteComment(comment)),
     createComment: (comment) => dispatch(createComment(comment)),
     updateComment: (comment) => dispatch(updateComment(comment)),
-    deleteComment: (commentId) => () => dispatch(deleteComment(commentId)),
+    deleteComment: (comment) => () => dispatch(deleteComment(comment)),
   };
 }
 
