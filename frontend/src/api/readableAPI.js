@@ -36,6 +36,8 @@ export const fetchPosts = () => {
   return fetch(url, header)
     .then(res => {
       return res.json()
+    }).then(posts => {
+      return posts.filter(post => post.deleted === false);
     })
 }
 

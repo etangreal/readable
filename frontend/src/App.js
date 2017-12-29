@@ -170,7 +170,7 @@ class App extends Component {
 
   renderPosts = () => {
     return Posts({
-      posts: this.props.posts,
+      posts: this.props.posts.filter(post => post.deleted === false),
       actions: this.actions()
     });
   }
@@ -178,7 +178,10 @@ class App extends Component {
   renderPostsByCategory = (props) => (
     Posts({
       posts: this.props.posts.filter((post) => {
-          return post.category === props.match.params.category
+          return (
+            post.category === props.match.params.category
+            && post.deleted === false
+          )
         }),
       actions: this.actions()
     })
@@ -187,8 +190,9 @@ class App extends Component {
   renderPostDetails = (props) => {
     const { category, postId } = props.match.params;
     const post = this.props.posts.find(
-      post => post.id === postId &&
-      post.category === category
+      post => post.id === postId
+      && post.category === category
+      && post.deleted === false
     );
 
     if (!post)
