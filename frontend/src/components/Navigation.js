@@ -11,20 +11,31 @@ const Navigation = ({categories, addPost}) => {
   });
 
   return (
-    <ul className="Navigation">
-      <li className="Navigation-item">
-        &nbsp;&nbsp;&nbsp;<Link to="/">Posts</Link>
-      </li>
-      <li className="Navigation-item">
-        <button onClick={addPost}>
-          Add Post <i className="far fa-plus" />
-        </button>
-      </li>
-      <li className="Navigation-item">
-        Categories:
-      </li>
-      {categoryLinks}
-    </ul>
+    <div>
+      <ul className="Navigation">
+        <li className="Navigation-header">
+          Navigation:
+        </li>
+        <li className="Navigation-item">
+          <Link to="/">Posts</Link>
+        </li>
+        <li className="Navigation-item">
+          Categories:
+        </li>
+        {categoryLinks}
+      </ul>
+      <ul className="Navigation">
+        <li className="Navigation-header">
+          Post Options:
+        </li>
+        <li className="Navigation-item">
+          <button onClick={addPost}>
+            Add Post <i className="far fa-plus" />
+          </button>
+        </li>
+      </ul>
+      <br />
+    </div>
   );
 };
 
