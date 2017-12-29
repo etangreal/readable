@@ -25,6 +25,39 @@ import Posts from './components/Posts';
 import Comment, { comment } from './components/Comment';
 import './App.css';
 
+// ------------------------------------------------------------------------------------------------
+// DECLARATIONS
+// ------------------------------------------------------------------------------------------------
+
+const SORT_BY_DATE = 'SORT_BY_DATE';
+const SORT_BY_VOTES = 'SORT_BY_VOTES';
+
+// ------------------------------------------------------------------------------------------------
+// FUNCTIONS
+// ------------------------------------------------------------------------------------------------
+
+const sortPosts = (sortType) => {
+  if (sortType === SORT_BY_VOTES)
+    return (p1, p2) => {
+      return p1.voteScore <= p2.voteScore;
+    };
+
+  return (p1, p2) => {
+    return p1.timestamp >= p2.timestamp;
+  };
+}
+
+const sortComments = (sortType) => {
+  if (sortType === SORT_BY_VOTES)
+    return (p1, p2) => {
+      return p1.voteScore <= p2.voteScore;
+    };
+
+  return (p1, p2) => {
+    return p1.timestamp >= p2.timestamp;
+  };
+}
+
 const updatePostState = (field, value) => (state) => ({
   post: {
     ...state.post,
@@ -50,10 +83,12 @@ class App extends Component {
       isPostAdd: false,
       isPostEdit: false,
       post: undefined,
+      sortPosts: SORT_BY_DATE,
 
       isCommentAdd: false,
       isCommentEdit: false,
-      comment: undefined
+      comment: undefined,
+      sortComments: SORT_BY_DATE
     }
   }
 
@@ -115,6 +150,18 @@ class App extends Component {
     });
   }
 
+  sortPostsByDate = () => {
+    this.setState({
+      sortPosts: SORT_BY_DATE
+    });
+  }
+
+  sortPostsByVotes = () => {
+    this.setState({
+      sortPosts: SORT_BY_VOTES
+    });
+  }
+
   // ----------------------------------------------------------------------------------------------
 
   addComment = (postId) => () => {
@@ -154,27 +201,45 @@ class App extends Component {
     });
   }
 
+  sortCommentsByDate = () => {
+    this.setState({
+      sortComments: SORT_BY_DATE
+    });
+  }
+
+  sortCommentsByVotes = () => {
+    this.setState({
+      sortComments: SORT_BY_VOTES
+    });
+  }
+
   // ----------------------------------------------------------------------------------------------
 
   actions = () => ({
-      upVotePost: this.props.upVotePost,
-      downVotePost: this.props.downVotePost,
-      addPost: this.addPost,
-      editPost: this.editPost,
-      deletePost: this.props.deletePost,
+    upVotePost: this.props.upVotePost,
+    downVotePost: this.props.downVotePost,
+    addPost: this.addPost,
+    editPost: this.editPost,
+    deletePost: this.props.deletePost,
+    sortPostByDate: this.sortPostsByDate,
+    sortPostByVotes: this.sortPostsByVotes,
 
-      upVoteComment: this.props.upVoteComment,
-      downVoteComment: this.props.downVoteComment,
-      addComment: this.addComment,
-      editComment: this.editComment,
-      deleteComment: this.props.deleteComment,
+    upVoteComment: this.props.upVoteComment,
+    downVoteComment: this.props.downVoteComment,
+    addComment: this.addComment,
+    editComment: this.editComment,
+    deleteComment: this.props.deleteComment,
+    sortCommentsByDate: this.sortCommentsByDate,
+    sortCommentsByVotes: this.sortCommentsByVotes
   })
 
   // ----------------------------------------------------------------------------------------------
 
   renderPosts = () => {
     return Posts({
-      posts: this.props.posts.filter(post => isPostNotDeleted(post)),
+      posts: this.props.posts
+        .filter(post => isPostNotDeleted(post))
+        .sort(sortPosts(this.state.sortPosts)),
       actions: this.actions()
     });
   }
@@ -186,7 +251,8 @@ class App extends Component {
             post.category === props.match.params.category
             && isPostNotDeleted(post)
           )
-        }),
+        })
+        .sort(sortPosts(this.state.sortPosts)),
       actions: this.actions()
     })
   )
@@ -206,7 +272,8 @@ class App extends Component {
 
     return Post.View({
         post,
-        comments: this.props.comments,
+        comments: this.props.comments
+          .sort(sortComments(this.state.sortComments)),
         actions: this.actions()
       });
   }
@@ -257,7 +324,7 @@ class App extends Component {
       <div>
         <Navigation
           categories={this.props.categories}
-          addPost={this.addPost} />
+          actions={this.actions()} />
 
         <Switch>
           <Route exact path='/' render={this.renderPosts} />

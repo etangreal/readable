@@ -3,7 +3,6 @@ import Comment from './Comment';
 
 const Comments = ({comments, postId, actions}) => {
   const list = comments ? comments
-    .sort((c1, c2) => c1.timestamp >= c2.timestamp)
     .map(comment => (
     <li key={comment.id}>
       {Comment.View({comment, actions})}
@@ -25,12 +24,12 @@ const Comments = ({comments, postId, actions}) => {
             <b>Sort By:</b>
         </li>
         <li className="Comment-navItem">
-          <button onClick={()=> console.log('sort by date')}>
+          <button onClick={actions.sortCommentsByDate}>
             Date <i className="far fa-sort-amount-down" />
           </button>
         </li>
         <li className="Comment-navItem">
-          <button onClick={()=> console.log('sort by votes')}>
+          <button onClick={actions.sortCommentsByVotes}>
             Votes <i className="far fa-sort-amount-down" />
           </button>
         </li>

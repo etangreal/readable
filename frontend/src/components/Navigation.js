@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const Navigation = ({categories, addPost}) => {
+const Navigation = ({categories, actions}) => {
   const categoryLinks = categories.map(category => {
     return (
       <li key={category.path} className="Navigation-item">
@@ -30,7 +30,7 @@ const Navigation = ({categories, addPost}) => {
           <b>Post Options:</b>
         </li>
         <li className="Navigation-item">
-          <button onClick={addPost}>
+          <button onClick={actions.addPost}>
             Add Post <i className="far fa-plus" />
           </button>
         </li>
@@ -38,12 +38,12 @@ const Navigation = ({categories, addPost}) => {
           <b>Sort By:</b>
         </li>
         <li className="Navigation-item">
-          <button onClick={()=> console.log('sort by date')}>
+          <button onClick={actions.sortPostByDate}>
             Date <i className="far fa-sort-amount-down" />
           </button>
         </li>
         <li className="Navigation-item">
-          <button onClick={()=> console.log('sort by votes')}>
+          <button onClick={actions.sortPostByVotes}>
             Votes <i className="far fa-sort-amount-down" />
           </button>
         </li>
