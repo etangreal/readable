@@ -10,6 +10,23 @@ const CommentEdit = ({
 
   return (
     <table><tbody>
+      <tr>
+        <td>Author:</td>
+        <td>{comment.author}</td>
+      </tr>
+      <tr>
+        <td>Body:</td>
+        <td><textarea
+          value={comment.body}
+          rows="4" cols="80"
+          onChange={handleUpdateComment('body')}
+        /></td>
+      </tr>
+
+      <tr>
+        <td>Vote Score:</td>
+        <td>{comment.voteScore}</td>
+      </tr>
       {/* <tr>
         <td>id:</td>
         <td>{comment.id}</td>
@@ -17,28 +34,12 @@ const CommentEdit = ({
       <tr>
         <td>parentId:</td>
         <td>{comment.parentId}</td>
-      </tr> */}
-      <tr>
-        <td>author:</td>
-        <td>{comment.author}</td>
       </tr>
       <tr>
-        <td>body:</td>
-        <td><textarea
-          value={comment.body}
-          rows="4" cols="80"
-          onChange={handleUpdateComment('body')}
-        /></td>
-      </tr>
-      {/* <tr>
         <td>timestamp:</td>
         <td>{comment.timestamp}</td>
-      </tr> */}
-      <tr>
-        <td>voteScore:</td>
-        <td>{comment.voteScore}</td>
       </tr>
-      {/* <tr>
+      <tr>
         <td>deleted:</td>
         <td>{comment.deleted.toString()}</td>
       </tr>

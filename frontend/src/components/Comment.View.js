@@ -12,18 +12,20 @@ const Comment = ({comment, actions}) => (
       </button>
     </span>
 
-    {/* id: {comment.id}<br />
-    parentId: {comment.parentId}<br /> */}
-    author: {comment.author}<br />
-    body: {comment.body}<br />
-    {/* timestamp: {comment.timestamp}<br /> */}
-    voteScore: {comment.voteScore}
+    <em>Author:</em> &nbsp; {comment.author}<br />
+    <em>Body:</em> &nbsp; {comment.body}<br />
+    <em>Vote Score:</em> &nbsp; {comment.voteScore}
     <VoteScore
       upVote={actions.upVoteComment(comment)}
       downVote={actions.downVoteComment(comment)}
     /><br />
-    {/* deleted: {comment.deleted.toString()}<br />
-    parentDeleted: {comment.parentDeleted.toString()}<br /> */}
+
+    {/* <br />
+    <b>id:</b> {comment.id}<br />
+    <b>parentId:</b> {comment.parentId}<br />
+    <b>timestamp:</b> {comment.timestamp}<br />
+    <b>deleted:</b> {comment.deleted.toString()}<br />
+    <b>parentDeleted:</b> {comment.parentDeleted.toString()}<br /> */}
   </div>
 );
 

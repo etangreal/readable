@@ -17,12 +17,8 @@ const PostAdd = ({
 
   return (
     <table><tbody>
-      {/* <tr>
-        <td>id:</td>
-        <td>{post.id}</td>
-      </tr> */}
       <tr>
-        <td>author:</td>
+        <td>Author:</td>
         <td><input
             type="text"
             value={post.author}
@@ -30,7 +26,7 @@ const PostAdd = ({
         /></td>
       </tr>
       <tr>
-        <td>category:</td>
+        <td>Category:</td>
         <td><Select
           items={categoryOptions}
           defaultValue={post.category}
@@ -38,7 +34,7 @@ const PostAdd = ({
         /></td>
       </tr>
       <tr>
-        <td>title:</td>
+        <td>Title:</td>
         <td><input
           type="text"
           className="PostEdit-title"
@@ -47,7 +43,7 @@ const PostAdd = ({
         /></td>
       </tr>
       <tr>
-        <td>body:</td>
+        <td>Body:</td>
         <td><textarea
           value={post.body}
           rows="4" cols="80"
@@ -55,6 +51,10 @@ const PostAdd = ({
         /></td>
       </tr>
       {/* <tr>
+        <td>id:</td>
+        <td>{post.id}</td>
+      </tr>
+      <tr>
         <td>timestamp:</td>
         <td>{post.timestamp}</td>
       </tr>

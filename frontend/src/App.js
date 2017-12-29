@@ -37,6 +37,7 @@ const updateCommentState = (field, value) => (state) => ({
     [field]: value
   }
 });
+const isPostNotDeleted = (post) => post.deleted !== true;
 
 // ------------------------------------------------------------------------------------------------
 // APP
@@ -173,7 +174,7 @@ class App extends Component {
 
   renderPosts = () => {
     return Posts({
-      posts: this.props.posts.filter(post => post.deleted === false),
+      posts: this.props.posts.filter(post => isPostNotDeleted(post)),
       actions: this.actions()
     });
   }
@@ -183,7 +184,7 @@ class App extends Component {
       posts: this.props.posts.filter((post) => {
           return (
             post.category === props.match.params.category
-            && post.deleted === false
+            && isPostNotDeleted(post)
           )
         }),
       actions: this.actions()
@@ -195,7 +196,7 @@ class App extends Component {
     const post = this.props.posts.find(
       post => post.id === postId
       && post.category === category
-      && post.deleted === false
+      && isPostNotDeleted(post)
     );
 
     if (!post)

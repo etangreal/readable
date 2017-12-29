@@ -38,18 +38,22 @@ const Post = ({
         </button>
       </span>
 
-      {/* id: {post.id}<br /> */}
-      author: {post.author}<br />
-      title: {post.title}<br />
-      category: {post.category}<br />
-      body: {post.body}<br />
-      {/* timestamp: {post.timestamp}<br /> */}
-      voteScore: {post.voteScore}
+      <em>Author:</em> &nbsp; {post.author}<br />
+      <em>Title:</em> &nbsp; {post.title}<br />
+      <em>Category:</em> &nbsp; {post.category}<br />
+      <em>Body:</em> &nbsp; {post.body}<br />
+      <em>Vote Score:</em> &nbsp; {post.voteScore}
       <VoteScore
         upVote={actions.upVotePost(post)}
         downVote={actions.downVotePost(post)}
       /><br />
-      {/* deleted: {post.deleted.toString()} */}
+
+      {/* <br />
+      <b>id:</b> {post.id}<br />
+      <b>timestamp:</b> {post.timestamp}<br />
+      <b>deleted:</b> {post.deleted.toString()}
+      <br /> */}
+
       {comments && Comments({comments, postId: post.id, actions})}
     </div>
   );

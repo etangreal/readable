@@ -10,16 +10,8 @@ const CommentEdit = ({
 
   return (
     <table><tbody>
-      {/* <tr>
-        <td>id:</td>
-        <td>{comment.id}</td>
-      </tr> */}
-      {/* <tr>
-        <td>parentId:</td>
-        <td>{comment.parentId}</td>
-      </tr> */}
       <tr>
-        <td>author:</td>
+        <td>Author:</td>
         <td><input
             type="text"
             value={comment.author}
@@ -27,7 +19,7 @@ const CommentEdit = ({
         /></td>
       </tr>
       <tr>
-        <td>body:</td>
+        <td>Body:</td>
         <td><textarea
           value={comment.body}
           rows="4" cols="80"
@@ -35,14 +27,22 @@ const CommentEdit = ({
         /></td>
       </tr>
       <tr>
+        <td>Vote Score:</td>
+        <td>{comment.voteScore}</td>
+      </tr>
+      {/* <tr>
+        <td>id:</td>
+        <td>{comment.id}</td>
+      </tr>
+      <tr>
+        <td>parentId:</td>
+        <td>{comment.parentId}</td>
+      </tr>
+      <tr>
         <td>timestamp:</td>
         <td>{comment.timestamp}</td>
       </tr>
       <tr>
-        <td>voteScore:</td>
-        <td>{comment.voteScore}</td>
-      </tr>
-      {/* <tr>
         <td>deleted:</td>
         <td>{comment.deleted.toString()}</td>
       </tr>
