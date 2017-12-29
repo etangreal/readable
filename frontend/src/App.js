@@ -63,7 +63,11 @@ class App extends Component {
   componentDidMount() {
     this.props.fetchCategories();
     this.props.fetchPosts();
-    if (this.postId) {
+  }
+
+  componentDidUpdate() {
+    if (this.postId !== this.savedPostId) {
+      this.savedPostId = this.postId;
       this.props.fetchComments(this.postId);
     }
   }
@@ -182,19 +186,21 @@ class App extends Component {
 
   renderPostDetails = (props) => {
     const { category, postId } = props.match.params;
-    this.postId = postId;
     const post = this.props.posts.find(
       post => post.id === postId &&
       post.category === category
     );
 
-    return post ?
-      Post.View({
+    if (!post)
+      return <div>no post ...</div>
+
+    this.postId = postId;
+
+    return Post.View({
         post,
         comments: this.props.comments,
         actions: this.actions()
-      })
-      : <div>none</div>;
+      });
   }
 
   renderPostAddOrEditModal = () => {
