@@ -38,18 +38,18 @@ const Post = ({
         </button>
       </span>
 
-      id: {post.id}<br />
+      {/* id: {post.id}<br /> */}
       author: {post.author}<br />
       title: {post.title}<br />
       category: {post.category}<br />
       body: {post.body}<br />
-      timestamp: {post.timestamp}<br />
+      {/* timestamp: {post.timestamp}<br /> */}
       voteScore: {post.voteScore}
       <VoteScore
         upVote={actions.upVotePost(post)}
         downVote={actions.downVotePost(post)}
       /><br />
-      deleted: {post.deleted.toString()}
+      {/* deleted: {post.deleted.toString()} */}
       {comments && Comments({comments, postId: post.id, actions})}
     </div>
   );

@@ -10,14 +10,14 @@ const CommentEdit = ({
 
   return (
     <table><tbody>
-      <tr>
+      {/* <tr>
         <td>id:</td>
         <td>{comment.id}</td>
       </tr>
       <tr>
         <td>parentId:</td>
         <td>{comment.parentId}</td>
-      </tr>
+      </tr> */}
       <tr>
         <td>author:</td>
         <td>{comment.author}</td>
@@ -30,22 +30,22 @@ const CommentEdit = ({
           onChange={handleUpdateComment('body')}
         /></td>
       </tr>
-      <tr>
+      {/* <tr>
         <td>timestamp:</td>
         <td>{comment.timestamp}</td>
-      </tr>
+      </tr> */}
       <tr>
         <td>voteScore:</td>
         <td>{comment.voteScore}</td>
       </tr>
-      <tr>
+      {/* <tr>
         <td>deleted:</td>
         <td>{comment.deleted.toString()}</td>
       </tr>
       <tr>
         <td>parentDeleted:</td>
         <td>{comment.parentDeleted.toString()}</td>
-      </tr>
+      </tr> */}
       <tr>
         <td></td>
         <td>

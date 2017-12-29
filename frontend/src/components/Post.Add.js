@@ -17,10 +17,10 @@ const PostAdd = ({
 
   return (
     <table><tbody>
-      <tr>
+      {/* <tr>
         <td>id:</td>
         <td>{post.id}</td>
-      </tr>
+      </tr> */}
       <tr>
         <td>author:</td>
         <td><input
@@ -54,14 +54,14 @@ const PostAdd = ({
           onChange={handleUpdatePost('body')}
         /></td>
       </tr>
-      <tr>
+      {/* <tr>
         <td>timestamp:</td>
         <td>{post.timestamp}</td>
       </tr>
       <tr>
         <td>voteScore:</td>
         <td>{post.voteScore}</td>
-      </tr>
+      </tr> */}
       <tr>
         <td></td>
         <td>

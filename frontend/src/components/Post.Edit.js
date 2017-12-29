@@ -11,10 +11,10 @@ const PostEdit = ({
 
   return (
     <table><tbody>
-      <tr>
+      {/* <tr>
         <td>id:</td>
         <td>{post.id}</td>
-      </tr>
+      </tr> */}
       <tr>
         <td>author:</td>
         <td>{post.author}</td>
@@ -40,10 +40,10 @@ const PostEdit = ({
           onChange={handleUpdatePost('body')}
         /></td>
       </tr>
-      <tr>
+      {/* <tr>
         <td>timestamp:</td>
         <td>{post.timestamp}</td>
-      </tr>
+      </tr> */}
       <tr>
         <td>voteScore:</td>
         <td>{post.voteScore}</td>
